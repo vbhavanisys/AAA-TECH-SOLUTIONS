@@ -1,0 +1,85 @@
+.placeholder-view {
+  background-color: #FFFFFF;
+}
+
+.placeholder-hero {
+  padding-top: var(--space-16);
+  padding-bottom: var(--space-12);
+  background-color: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.placeholder-content {
+  max-width: 760px;
+}
+
+.placeholder-title {
+  color: var(--color-primary-dark);
+  font-size: clamp(2rem, 3vw + 1rem, 2.75rem);
+  margin-bottom: var(--space-3);
+  letter-spacing: -0.02em;
+}
+
+.placeholder-desc {
+  font-size: var(--text-lg);
+  color: var(--color-text-secondary);
+  line-height: 1.55;
+  margin-bottom: 0;
+}
+
+.placeholder-body-section {
+  padding-top: var(--space-12);
+  padding-bottom: var(--space-16);
+}
+
+.placeholder-card {
+  background-color: #FFFFFF;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-8);
+}
+
+.placeholder-card-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  margin-bottom: var(--space-5);
+  padding-bottom: var(--space-4);
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.placeholder-icon {
+  color: var(--color-accent);
+  flex-shrink: 0;
+}
+
+.placeholder-card-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin-bottom: 2px;
+}
+
+.placeholder-card-sub {
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  margin-bottom: 0;
+}
+
+.placeholder-card-sub strong {
+  color: var(--color-accent);
+}
+
+.placeholder-body-text {
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+  margin-bottom: var(--space-6);
+}
+
+.placeholder-action-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+}

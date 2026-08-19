@@ -1,0 +1,87 @@
+/* Responsive Breakpoints & Utilities */
+
+/* Large Desktop (1440px and up) */
+@media (min-width: 1440px) {
+  :root {
+    --container-max-width: 1280px;
+  }
+}
+
+/* Standard Desktop to Tablet Landscape (1024px to 1279px) */
+@media (max-width: 1279px) {
+  .grid-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Tablet (768px to 1023px) */
+@media (max-width: 1023px) {
+  .section {
+    padding-top: var(--space-14);
+    padding-bottom: var(--space-14);
+  }
+
+  .grid-3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .grid-2 {
+    gap: var(--space-6);
+  }
+}
+
+/* Mobile & Small Tablet (max-width: 767px) */
+@media (max-width: 767px) {
+  :root {
+    --container-padding: 1.25rem;
+  }
+
+  .section {
+    padding-top: var(--space-10);
+    padding-bottom: var(--space-10);
+  }
+
+  .section-header {
+    margin-bottom: var(--space-8);
+  }
+
+  .grid-2,
+  .grid-3,
+  .grid-4 {
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
+  }
+
+  .btn-lg {
+    padding: 0.75rem 1.25rem;
+    font-size: var(--text-sm);
+  }
+
+  .hero-cta-group {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .hero-cta-group .btn {
+    width: 100%;
+  }
+}
+
+/* Small Mobile (320px - 375px) */
+@media (max-width: 375px) {
+  :root {
+    --container-padding: 1rem;
+  }
+
+  h1 {
+    font-size: 1.85rem;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  .card {
+    padding: var(--space-4);
+  }
+}
