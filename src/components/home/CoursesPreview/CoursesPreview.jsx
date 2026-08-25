@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Clock, BarChart, ArrowRight, CheckCircle, Code2, Cloud, Palette, Database } from 'lucide-react';
 import SectionHeader from '../../common/SectionHeader/SectionHeader';
 import { coursesData } from '../../../data/courses';
+import { useEnrollmentModal } from '../../../context/EnrollmentContext';
 import './CoursesPreview.css';
 
 const courseCategories = ["All Programs", "Software Development", "Cloud & Infrastructure", "Design & Product", "Data & AI"];
@@ -16,6 +17,7 @@ const iconByCat = {
 
 export default function CoursesPreview() {
   const [activeTab, setActiveTab] = useState("All Programs");
+  const { openEnrollmentModal } = useEnrollmentModal();
 
   const filtered = activeTab === "All Programs"
     ? coursesData
@@ -86,10 +88,16 @@ export default function CoursesPreview() {
                   <Link to={course.link} className="btn btn-outline btn-sm course-btn-view">
                     View Curriculum
                   </Link>
-                  <Link to={course.enrollmentUrl} className="btn btn-primary btn-sm course-btn-enroll">
+                  <button
+                    type="button"
+                    onClick={(e) => openEnrollmentModal(course.id, e.currentTarget)}
+                    className="btn btn-primary btn-sm course-btn-enroll"
+                    aria-haspopup="dialog"
+                    aria-label={`Enroll in ${course.title}`}
+                  >
                     <span>Enroll Now</span>
                     <ArrowRight size={14} aria-hidden="true" />
-                  </Link>
+                  </button>
                 </div>
               </div>
             );

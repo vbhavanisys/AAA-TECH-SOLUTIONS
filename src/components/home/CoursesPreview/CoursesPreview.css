@@ -37,42 +37,45 @@
 
 .courses-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
   margin-bottom: 3.5rem;
 }
 
 .course-card {
   background: #FFFFFF;
   border-radius: var(--radius-xl);
-  padding: 1.8rem;
+  padding: 1.5rem;
   border: 1.5px solid rgba(21, 101, 192, 0.1);
   display: flex;
   flex-direction: column;
+  height: 100%;
+  box-sizing: border-box;
 }
 
 .course-card-head {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 1.25rem;
+  margin-bottom: 1.15rem;
 }
 
 .course-icon-badge {
-  width: 46px;
-  height: 46px;
+  width: 44px;
+  height: 44px;
   border-radius: 12px;
   background: linear-gradient(135deg, rgba(21, 101, 192, 0.12), rgba(0, 180, 216, 0.1));
   color: var(--blue);
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
 }
 
 .course-meta-pills {
   display: flex;
   align-items: center;
-  gap: 0.4rem;
+  gap: 0.35rem;
   flex-wrap: wrap;
 }
 
@@ -89,7 +92,7 @@
   font-size: 0.85rem;
   color: var(--color-text-muted);
   line-height: 1.6;
-  margin-bottom: 1.25rem;
+  margin-bottom: 1.15rem;
   flex: 1;
 }
 
@@ -97,7 +100,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 0.35rem;
-  margin-bottom: 1.2rem;
+  margin-bottom: 1.15rem;
 }
 
 .course-tag {
@@ -116,7 +119,7 @@
   font-size: 0.78rem;
   font-weight: 600;
   color: var(--green-dark);
-  margin-bottom: 1.25rem;
+  margin-bottom: 1.15rem;
   padding: 0.4rem 0.75rem;
   background: var(--color-success-bg);
   border-radius: var(--radius-sm);
@@ -124,24 +127,36 @@
 
 .course-mode-icon {
   color: var(--green);
+  flex-shrink: 0;
 }
 
 .course-card-actions {
-  display: grid;
-  grid-template-columns: 1fr 1.2fr;
-  gap: 0.6rem;
-  padding-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  margin-top: auto;
+  padding-top: 1.1rem;
   border-top: 1px solid rgba(21, 101, 192, 0.08);
+  width: 100%;
 }
 
-.course-btn-view {
-  font-size: 0.78rem;
-  padding: 0.55rem 0.5rem;
+.course-btn-view,
+.course-btn-enroll {
+  width: 100%;
+  padding: 0.65rem 1rem;
+  font-size: 0.84rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  white-space: nowrap;
+  border-radius: var(--radius-pill);
+  box-sizing: border-box;
 }
 
 .course-btn-enroll {
-  font-size: 0.8rem;
-  padding: 0.55rem 0.75rem;
+  gap: 0.35rem;
 }
 
 .courses-bottom-row {
@@ -149,12 +164,33 @@
   justify-content: center;
 }
 
-@media (max-width: 640px) {
+/* Tablet view (2 columns for spacious cards with side-by-side buttons) */
+@media (min-width: 768px) and (max-width: 1200px) {
   .courses-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
   }
 
   .course-card-actions {
+    flex-direction: row;
+    gap: 0.75rem;
+  }
+
+  .course-btn-view,
+  .course-btn-enroll {
+    flex: 1;
+    padding: 0.65rem 1rem;
+  }
+}
+
+/* Mobile responsive */
+@media (max-width: 767px) {
+  .courses-grid {
     grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .course-card {
+    padding: 1.35rem;
   }
 }

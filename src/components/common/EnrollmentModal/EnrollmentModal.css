@@ -1,0 +1,362 @@
+/* Backdrop Overlay */
+.enrollment-modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(10, 25, 60, 0.68);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  animation: modalFadeIn 0.25s ease-out;
+  overflow-y: auto;
+}
+
+@keyframes modalFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Modal Dialog Box */
+.enrollment-modal-dialog {
+  background: #FFFFFF;
+  border-radius: var(--radius-2xl);
+  border: 1.5px solid rgba(21, 101, 192, 0.18);
+  box-shadow: 0 25px 60px -15px rgba(13, 33, 87, 0.38), 0 0 0 1px rgba(255, 255, 255, 0.8) inset;
+  width: 100%;
+  max-width: 480px;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  animation: modalPopIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-sizing: border-box;
+}
+
+@keyframes modalPopIn {
+  from {
+    opacity: 0;
+    transform: scale(0.94) translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Header */
+.enrollment-modal-header {
+  padding: 1.35rem 1.6rem 1rem;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(21, 101, 192, 0.08);
+  background: linear-gradient(180deg, #FAFCFF 0%, #FFFFFF 100%);
+  flex-shrink: 0;
+}
+
+.modal-title-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.enrollment-modal-title {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--navy);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.modal-title-icon {
+  font-size: 1.35rem;
+  line-height: 1;
+}
+
+.enrollment-modal-subtitle {
+  font-size: 0.82rem;
+  color: var(--color-text-muted);
+  margin: 0;
+  line-height: 1.4;
+}
+
+.enrollment-modal-close-btn {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: rgba(21, 101, 192, 0.08);
+  border: none;
+  color: var(--navy);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  flex-shrink: 0;
+  margin-left: 0.75rem;
+}
+
+.enrollment-modal-close-btn:hover {
+  background: rgba(229, 57, 53, 0.12);
+  color: #E53935;
+  transform: rotate(90deg);
+}
+
+.enrollment-modal-close-btn:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 2px;
+}
+
+/* Modal Body */
+.enrollment-modal-body {
+  padding: 1.35rem 1.6rem 1.6rem;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.enrollment-modal-body::-webkit-scrollbar {
+  width: 5px;
+}
+
+.enrollment-modal-body::-webkit-scrollbar-thumb {
+  background: rgba(21, 101, 192, 0.25);
+  border-radius: 4px;
+}
+
+/* Form Layout */
+.enrollment-modal-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin-bottom: 0.95rem;
+}
+
+.modal-form-label {
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: var(--navy);
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.req-asterisk {
+  color: #E53935;
+  font-weight: 700;
+}
+
+.optional-tag {
+  font-size: 0.74rem;
+  font-weight: 400;
+  color: var(--color-text-muted);
+}
+
+.modal-form-input,
+.modal-form-select {
+  width: 100%;
+  padding: 0.68rem 0.95rem;
+  border-radius: var(--radius-md);
+  border: 1.5px solid rgba(21, 101, 192, 0.2);
+  background: #FAFBFF;
+  font-size: 0.88rem;
+  font-family: var(--font-sans);
+  color: var(--navy);
+  transition: all var(--transition-fast);
+  box-sizing: border-box;
+}
+
+.modal-form-input:focus,
+.modal-form-select:focus {
+  outline: none;
+  border-color: var(--blue);
+  background: #FFFFFF;
+  box-shadow: 0 0 0 3px rgba(21, 101, 192, 0.14);
+}
+
+.modal-form-input:disabled,
+.modal-form-select:disabled {
+  background: #F1F5F9;
+  cursor: not-allowed;
+  opacity: 0.8;
+}
+
+.modal-form-group.has-error .modal-form-input,
+.modal-form-group.has-error .modal-form-select {
+  border-color: #E53935;
+  background: #FFF8F8;
+}
+
+.modal-field-error {
+  font-size: 0.75rem;
+  color: #E53935;
+  font-weight: 500;
+  margin-top: 0.2rem;
+}
+
+.modal-form-textarea {
+  resize: vertical;
+  min-height: 75px;
+  line-height: 1.5;
+}
+
+/* Action Buttons */
+.modal-submit-btn {
+  width: 100%;
+  margin-top: 0.4rem;
+  padding: 0.8rem 1.4rem;
+  font-size: 0.92rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.modal-submit-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+.modal-wa-btn {
+  width: 100%;
+  margin-top: 0.65rem;
+  padding: 0.75rem 1.4rem;
+  font-size: 0.86rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  text-decoration: none;
+}
+
+.spinner-icon {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Success View */
+.enrollment-success-view {
+  text-align: center;
+  padding: 1.5rem 0.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: modalFadeIn 0.35s ease-out;
+}
+
+.success-icon-badge {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: rgba(37, 211, 102, 0.12);
+  color: var(--green);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.success-heading {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 0.6rem;
+}
+
+.success-message {
+  font-size: 0.88rem;
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+  max-width: 380px;
+  margin-bottom: 1.25rem;
+}
+
+.enrollment-ref-card {
+  background: rgba(21, 101, 192, 0.06);
+  border: 1.5px dashed rgba(21, 101, 192, 0.3);
+  border-radius: var(--radius-lg);
+  padding: 0.75rem 1.5rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+}
+
+.ref-label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  letter-spacing: 0.04em;
+}
+
+.ref-number {
+  font-family: var(--font-mono, monospace);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--blue);
+  letter-spacing: 0.05em;
+}
+
+.success-actions-row {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 0.65rem;
+}
+
+.modal-close-action-btn {
+  width: 100%;
+  padding: 0.7rem 1.2rem;
+  font-size: 0.88rem;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 480px) {
+  .enrollment-modal-dialog {
+    max-height: 94vh;
+    border-radius: var(--radius-xl);
+  }
+
+  .enrollment-modal-header {
+    padding: 1.15rem 1.2rem 0.85rem;
+  }
+
+  .enrollment-modal-title {
+    font-size: 1.2rem;
+  }
+
+  .enrollment-modal-body {
+    padding: 1.15rem 1.2rem 1.4rem;
+  }
+
+  .modal-form-input,
+  .modal-form-select {
+    padding: 0.65rem 0.85rem;
+    font-size: 0.86rem;
+  }
+}

@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Star, MessageSquare, Send, CheckCircle2 } from 'lucide-react';
+import React, { useState } from 'react';
+import { Star, Send, CheckCircle2, Loader2, RefreshCw } from 'lucide-react';
 import SectionHeader from '../../common/SectionHeader/SectionHeader';
 import './ReviewsSection.css';
 
@@ -42,6 +42,14 @@ const initialReviews = [
   }
 ];
 
+const ratingLabels = {
+  1: "1 out of 5 — Needs Improvement",
+  2: "2 out of 5 — Fair Experience",
+  3: "3 out of 5 — Good Program",
+  4: "4 out of 5 — Very Good",
+  5: "5 out of 5 — Excellent"
+};
+
 export default function ReviewsSection() {
   const [reviews, setReviews] = useState(() => {
     try {
@@ -55,36 +63,60 @@ export default function ReviewsSection() {
   const [formName, setFormName] = useState('');
   const [formCourse, setFormCourse] = useState('');
   const [formStars, setFormStars] = useState(5);
+  const [hoverStars, setHoverStars] = useState(0);
   const [formText, setFormText] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
+
+  const activeRating = hoverStars || formStars;
 
   const handleReviewSubmit = (e) => {
     e.preventDefault();
-    if (!formName.trim() || !formText.trim()) return;
+    if (!formName.trim() || !formText.trim() || isSubmitting) return;
 
-    const newReview = {
-      id: Date.now(),
-      name: formName.trim(),
-      date: "Just now",
-      stars: formStars,
-      course: formCourse.trim() || "Technology Program",
-      text: formText.trim(),
-      avatarBg: "linear-gradient(135deg, #1565C0, #00B4D8)"
-    };
+    setIsSubmitting(true);
 
-    const updated = [newReview, ...reviews];
-    setReviews(updated);
-    try {
-      localStorage.setItem('aaa_reviews', JSON.stringify(updated));
-    } catch (e) {
-      console.warn(e);
+    // Simulate smooth submission delay
+    setTimeout(() => {
+      const newReview = {
+        id: Date.now(),
+        name: formName.trim(),
+        date: "Just now",
+        stars: formStars,
+        course: formCourse.trim() || "Technology Program",
+        text: formText.trim(),
+        avatarBg: "linear-gradient(135deg, #1565C0, #00B4D8)"
+      };
+
+      const updated = [newReview, ...reviews];
+      setReviews(updated);
+      try {
+        localStorage.setItem('aaa_reviews', JSON.stringify(updated));
+      } catch (err) {
+        console.warn(err);
+      }
+
+      setFormName('');
+      setFormCourse('');
+      setFormText('');
+      setFormStars(5);
+      setHoverStars(0);
+      setIsSubmitting(false);
+      setFormSubmitted(true);
+    }, 600);
+  };
+
+  const handleKeyDownStar = (e, starVal) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      setFormStars(starVal);
+    } else if (e.key === 'ArrowRight' && starVal < 5) {
+      e.preventDefault();
+      setFormStars(starVal + 1);
+    } else if (e.key === 'ArrowLeft' && starVal > 1) {
+      e.preventDefault();
+      setFormStars(starVal - 1);
     }
-
-    setFormName('');
-    setFormCourse('');
-    setFormText('');
-    setFormSubmitted(true);
-    setTimeout(() => setFormSubmitted(false), 4000);
   };
 
   return (
@@ -104,39 +136,53 @@ export default function ReviewsSection() {
                 <div className="score-number">{reviews.length}</div>
                 <div className="score-label">Verified Reviews</div>
               </div>
-              <div className="score-divider"></div>
+              <div className="score-divider" aria-hidden="true"></div>
               <div className="score-box">
                 <div className="score-rating">
                   <span>5.0</span>
-                  <div className="stars-mini">★★★★★</div>
+                  <div className="stars-mini" aria-hidden="true">★★★★★</div>
                 </div>
                 <div className="score-label">Average Satisfaction</div>
               </div>
             </div>
 
-            <div className="reviews-scroll-container">
+            <div className="reviews-scroll-container" aria-label="List of student reviews">
               {reviews.map((rev) => (
-                <div key={rev.id} className="review-item-card card">
+                <article key={rev.id} className="review-item-card card">
                   <div className="review-header">
-                    <div className="review-avatar" style={{ background: rev.avatarBg }}>
+                    <div className="review-avatar" style={{ background: rev.avatarBg }} aria-hidden="true">
                       {rev.name.charAt(0)}
                     </div>
-                    <div>
+                    <div className="review-meta">
                       <div className="review-author">{rev.name}</div>
                       <div className="review-date">{rev.date}</div>
                     </div>
                   </div>
 
-                  <div className="review-stars-row">
-                    {Array.from({ length: rev.stars }).map((_, sIdx) => (
-                      <Star key={sIdx} size={15} className="star-filled" />
-                    ))}
+                  <div className="review-rating-line">
+                    <div
+                      className="review-stars-row"
+                      role="img"
+                      aria-label={`Rated ${rev.stars} out of 5 stars`}
+                    >
+                      {[1, 2, 3, 4, 5].map((starIndex) => (
+                        <Star
+                          key={starIndex}
+                          size={16}
+                          className={starIndex <= rev.stars ? "star-filled" : "star-empty"}
+                          aria-hidden="true"
+                        />
+                      ))}
+                    </div>
+                    <span className="review-numeric-score">{rev.stars}.0 / 5.0</span>
                   </div>
 
                   <p className="review-body-text">"{rev.text}"</p>
 
-                  <span className="review-course-badge">{rev.course}</span>
-                </div>
+                  <div className="review-footer-row">
+                    <span className="review-course-badge">{rev.course}</span>
+                  </div>
+                </article>
               ))}
             </div>
           </div>
@@ -149,68 +195,121 @@ export default function ReviewsSection() {
 
               {formSubmitted ? (
                 <div className="review-success-state">
-                  <CheckCircle2 size={36} className="review-success-icon" />
+                  <CheckCircle2 size={44} className="review-success-icon" />
                   <h4>Thank You!</h4>
                   <p>Your review has been posted successfully and added to our student feedback.</p>
+                  <button
+                    type="button"
+                    className="btn btn-outline btn-sm write-another-btn"
+                    onClick={() => setFormSubmitted(false)}
+                  >
+                    <RefreshCw size={14} aria-hidden="true" />
+                    <span>Write Another Review</span>
+                  </button>
                 </div>
               ) : (
                 <form onSubmit={handleReviewSubmit} className="review-form">
                   <div className="form-group">
-                    <label className="form-label">Your Name</label>
+                    <label htmlFor="reviewer-name" className="form-label">
+                      Your Name <span className="req-star">*</span>
+                    </label>
                     <input
+                      id="reviewer-name"
                       type="text"
                       required
                       placeholder="e.g. Priya Sharma"
                       value={formName}
                       onChange={(e) => setFormName(e.target.value)}
                       className="form-input"
+                      disabled={isSubmitting}
                     />
                   </div>
 
                   <div className="form-group">
-                    <label className="form-label">Course or Service Taken</label>
+                    <label htmlFor="reviewer-course" className="form-label">
+                      Course or Service Taken
+                    </label>
                     <input
+                      id="reviewer-course"
                       type="text"
                       placeholder="e.g. Full-Stack Software Engineering"
                       value={formCourse}
                       onChange={(e) => setFormCourse(e.target.value)}
                       className="form-input"
+                      disabled={isSubmitting}
                     />
                   </div>
 
                   <div className="form-group">
-                    <label className="form-label">Rating</label>
-                    <div className="star-rating-selector">
-                      {[1, 2, 3, 4, 5].map((starVal) => (
-                        <button
-                          key={starVal}
-                          type="button"
-                          className={`star-select-btn ${starVal <= formStars ? 'selected' : ''}`}
-                          onClick={() => setFormStars(starVal)}
-                          aria-label={`Rate ${starVal} stars`}
-                        >
-                          ★
-                        </button>
-                      ))}
-                      <span className="rating-text-label">{formStars} out of 5</span>
+                    <label className="form-label" id="rating-label">
+                      Rating <span className="req-star">*</span>
+                    </label>
+                    <div
+                      className="star-rating-selector"
+                      role="radiogroup"
+                      aria-labelledby="rating-label"
+                    >
+                      <div className="stars-interactive-group">
+                        {[1, 2, 3, 4, 5].map((starVal) => {
+                          const isFilled = starVal <= activeRating;
+                          return (
+                            <button
+                              key={starVal}
+                              type="button"
+                              role="radio"
+                              aria-checked={formStars === starVal}
+                              tabIndex={formStars === starVal ? 0 : -1}
+                              className={`star-select-btn ${isFilled ? 'active' : ''}`}
+                              onClick={() => setFormStars(starVal)}
+                              onMouseEnter={() => setHoverStars(starVal)}
+                              onMouseLeave={() => setHoverStars(0)}
+                              onKeyDown={(e) => handleKeyDownStar(e, starVal)}
+                              aria-label={`Rate ${starVal} star${starVal > 1 ? 's' : ''}`}
+                              disabled={isSubmitting}
+                            >
+                              ★
+                            </button>
+                          );
+                        })}
+                      </div>
+                      <span className="rating-text-label" aria-live="polite">
+                        {ratingLabels[activeRating]}
+                      </span>
                     </div>
                   </div>
 
                   <div className="form-group">
-                    <label className="form-label">Your Feedback / Review</label>
+                    <label htmlFor="reviewer-feedback" className="form-label">
+                      Your Feedback / Review <span className="req-star">*</span>
+                    </label>
                     <textarea
+                      id="reviewer-feedback"
                       required
-                      rows="3"
-                      placeholder="Share your experience..."
+                      rows="4"
+                      placeholder="Share your experience with our mentorship, curriculum, projects, and career support..."
                       value={formText}
                       onChange={(e) => setFormText(e.target.value)}
                       className="form-input form-textarea"
+                      disabled={isSubmitting}
                     ></textarea>
                   </div>
 
-                  <button type="submit" className="btn btn-primary btn-lg submit-review-btn">
-                    <span>Post Review</span>
-                    <Send size={16} aria-hidden="true" />
+                  <button
+                    type="submit"
+                    className="btn btn-primary btn-lg submit-review-btn"
+                    disabled={isSubmitting || !formName.trim() || !formText.trim()}
+                  >
+                    {isSubmitting ? (
+                      <>
+                        <Loader2 size={18} className="spinner-icon" aria-hidden="true" />
+                        <span>Posting Review...</span>
+                      </>
+                    ) : (
+                      <>
+                        <span>Post Review</span>
+                        <Send size={16} aria-hidden="true" />
+                      </>
+                    )}
                   </button>
                 </form>
               )}

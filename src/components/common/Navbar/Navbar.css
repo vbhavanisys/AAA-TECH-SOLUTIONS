@@ -77,12 +77,17 @@
   color: #FFFFFF;
   padding: 0.55rem 1.4rem;
   border-radius: var(--radius-pill);
+  border: 1.5px solid transparent;
   font-weight: 600;
   font-size: 0.85rem;
+  font-family: inherit;
+  line-height: 1;
   text-decoration: none;
   display: inline-flex;
   align-items: center;
   gap: 0.45rem;
+  cursor: pointer;
+  user-select: none;
   transition: all var(--transition-fast);
   box-shadow: var(--shadow-btn-primary);
 }

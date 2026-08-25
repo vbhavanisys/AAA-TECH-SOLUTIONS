@@ -2,12 +2,14 @@ import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft, Clock, BarChart, Calendar, CheckCircle2, ArrowRight, BookOpen, Layers, ShieldCheck, AlertCircle, MessageSquare } from 'lucide-react';
 import { coursesData } from '../../data/courses';
+import { useEnrollmentModal } from '../../context/EnrollmentContext';
 import FinalCTA from '../../components/home/FinalCTA/FinalCTA';
 import './CourseDetailPage.css';
 
 export default function CourseDetailPage() {
   const { id } = useParams();
   const course = coursesData.find((c) => c.id === id) || coursesData[0];
+  const { openEnrollmentModal } = useEnrollmentModal();
 
   const waCourseUrl = `https://wa.me/917358533721?text=Hi%20AAA%20Tech%20Solutions%2C%20I%20am%20interested%20in%20the%20${encodeURIComponent(course.title)}%20program.`;
 
@@ -29,49 +31,47 @@ export default function CourseDetailPage() {
       {/* Course Detail Hero */}
       <section className="course-detail-hero">
         <div className="container">
+          <Link to="/courses" className="back-link">
+            <ArrowLeft size={16} aria-hidden="true" />
+            <span>Back to All Courses</span>
+          </Link>
+
           <div className="course-hero-grid">
             <div className="course-hero-main">
               <span className="section-tag section-tag-dark">{course.category}</span>
-              <h1 className="course-detail-h1">{course.title}</h1>
-              <p className="course-detail-summary">{course.overview || course.shortDescription}</p>
+              <h1 className="course-hero-title">{course.title}</h1>
+              <p className="course-hero-desc">{course.overview}</p>
 
-              <div className="course-meta-tags-row">
-                <span className="badge badge-accent">
-                  <Clock size={13} aria-hidden="true" />
-                  {course.duration}
-                </span>
-                <span className="badge badge-neutral">
-                  <BarChart size={13} aria-hidden="true" />
-                  {course.level}
-                </span>
-                <span className="badge badge-success">
-                  <CheckCircle2 size={13} aria-hidden="true" />
-                  {course.mode}
-                </span>
+              <div className="course-hero-meta-badges">
+                <div className="hero-meta-badge">
+                  <Clock size={16} />
+                  <span><strong>Duration:</strong> {course.duration}</span>
+                </div>
+                <div className="hero-meta-badge">
+                  <BarChart size={16} />
+                  <span><strong>Level:</strong> {course.level}</span>
+                </div>
+                <div className="hero-meta-badge">
+                  <Calendar size={16} />
+                  <span><strong>Schedule:</strong> {course.schedule}</span>
+                </div>
               </div>
             </div>
 
-            {/* Quick Action Side Card */}
-            <div className="course-sidebar-card card">
-              <div className="sidebar-fee-header">
-                <span className="sidebar-fee-label">Tuition Fee</span>
-                <div className="sidebar-fee-value">{course.fees}</div>
+            {/* Quick Enrollment Card */}
+            <div className="course-enroll-card card">
+              <div className="enroll-card-header">
+                <span className="enroll-tuition-label">Total Cohort Tuition</span>
+                <div className="enroll-tuition-price">{course.fees}</div>
+                <span className="enroll-spots-badge">⚡ Next Cohort Starting Soon</span>
               </div>
 
-              <div className="sidebar-details-list">
+              <div className="enroll-details-list">
                 <div className="sidebar-detail-item">
-                  <Clock size={16} className="sidebar-item-icon" />
+                  <CheckCircle2 size={16} className="sidebar-item-icon" />
                   <div>
-                    <div className="sidebar-item-title">Duration</div>
-                    <div className="sidebar-item-sub">{course.duration}</div>
-                  </div>
-                </div>
-
-                <div className="sidebar-detail-item">
-                  <Calendar size={16} className="sidebar-item-icon" />
-                  <div>
-                    <div className="sidebar-item-title">Schedule</div>
-                    <div className="sidebar-item-sub">{course.schedule}</div>
+                    <div className="sidebar-item-title">Delivery Format</div>
+                    <div className="sidebar-item-sub">{course.mode}</div>
                   </div>
                 </div>
 
@@ -85,10 +85,16 @@ export default function CourseDetailPage() {
               </div>
 
               <div className="sidebar-actions-group">
-                <Link to={`/enrollment?course=${course.id}`} className="btn btn-primary btn-lg sidebar-enroll-btn">
+                <button
+                  type="button"
+                  onClick={(e) => openEnrollmentModal(course.id, e.currentTarget)}
+                  className="btn btn-primary btn-lg sidebar-enroll-btn"
+                  aria-haspopup="dialog"
+                  aria-label={`Enroll in ${course.title}`}
+                >
                   <span>Enroll in this Cohort</span>
                   <ArrowRight size={16} aria-hidden="true" />
-                </Link>
+                </button>
                 <a href={waCourseUrl} target="_blank" rel="noopener noreferrer" className="btn btn-wa btn-lg sidebar-wa-btn">
                   <MessageSquare size={16} />
                   <span>Enquire on WhatsApp</span>

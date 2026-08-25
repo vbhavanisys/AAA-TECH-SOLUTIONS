@@ -53,7 +53,15 @@ export default function Footer() {
           <div className="footer-contact-list">
             <div className="footer-contact-item">
               <MapPin size={16} className="footer-contact-icon" aria-hidden="true" />
-              <span>{companyInfo.contact.address}</span>
+              <a
+                href={companyInfo.location.mapsUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="footer-contact-link"
+                title="View AAA Tech Solutions in Google Maps"
+              >
+                {companyInfo.contact.address}
+              </a>
             </div>
             <div className="footer-contact-item">
               <Mail size={16} className="footer-contact-icon" aria-hidden="true" />

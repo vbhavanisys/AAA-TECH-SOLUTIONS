@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Mail, Phone, MapPin, Clock, Send, CheckCircle2, Building, MessageSquare, AlertCircle } from 'lucide-react';
+import { Mail, Phone, MapPin, Clock, Send, CheckCircle2, Building, MessageSquare, AlertCircle, ArrowRight, ExternalLink } from 'lucide-react';
 import { companyInfo } from '../../data/company';
 import SectionHeader from '../../components/common/SectionHeader/SectionHeader';
 import './ContactPage.css';
@@ -68,20 +68,38 @@ export default function ContactPage() {
       <section className="section contact-main-section">
         <div className="container">
           <div className="contact-layout-grid">
-            {/* Left: Contact Info & WhatsApp */}
+            {/* Left: Contact Info & Location Map */}
             <div className="contact-info-column">
               <div className="contact-details-card card">
                 <h2 className="info-card-title">Corporate Headquarters & Inquiries</h2>
                 <p className="info-card-sub">Direct channels for clients, partners, and learners.</p>
 
                 <div className="info-items-list">
-                  <div className="info-item">
+                  {/* Official Address Info Card */}
+                  <div className="info-item info-item-address">
                     <div className="info-icon-box">
                       <MapPin size={20} className="info-icon" />
                     </div>
-                    <div>
-                      <div className="info-label">Office Address</div>
-                      <div className="info-value">{companyInfo.contact.address}</div>
+                    <div className="info-content-wrap">
+                      <div className="info-label">📍 Our Location</div>
+                      <address className="contact-address-block">
+                        <span className="address-line font-medium">{companyInfo.location.addressLine1}</span>
+                        <span className="address-line tamil-address-line">{companyInfo.location.addressLine2}</span>
+                        <span className="address-line">{companyInfo.location.area}</span>
+                        <span className="address-line">{companyInfo.location.city}</span>
+                        <span className="address-line">{companyInfo.location.state} {companyInfo.location.postalCode}</span>
+                        <span className="address-line">{companyInfo.location.country}</span>
+                      </address>
+                      <a
+                        href={companyInfo.location.mapsUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="btn btn-outline btn-sm get-directions-btn"
+                        aria-label="Get Directions to AAA Tech Solutions on Google Maps"
+                      >
+                        <span>Get Directions</span>
+                        <ArrowRight size={14} aria-hidden="true" />
+                      </a>
                     </div>
                   </div>
 
@@ -129,21 +147,53 @@ export default function ContactPage() {
                 </div>
               </div>
 
-              {/* Location Card */}
+              {/* Location & Google Map Card */}
               <div className="map-area-card card">
                 <div className="map-card-header">
-                  <Building size={18} className="map-header-icon" />
-                  <span>Innovation District Campus</span>
-                </div>
-                <div className="map-mock-view">
-                  <div className="map-pin-indicator">
-                    <MapPin size={28} className="map-center-pin" />
-                    <span className="map-pin-label">AAA Tech Solutions</span>
+                  <div className="map-header-title">
+                    <Building size={18} className="map-header-icon" />
+                    <span>AAA Tech Solutions — Office Location</span>
                   </div>
-                  <div className="map-grid-lines" aria-hidden="true"></div>
+                  <a
+                    href={companyInfo.location.mapsUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="map-header-link"
+                    title="Open AAA Tech Solutions on Google Maps"
+                  >
+                    <span>View on Maps</span>
+                    <ExternalLink size={13} aria-hidden="true" />
+                  </a>
                 </div>
+
+                <div className="map-frame-wrapper">
+                  <iframe
+                    title="AAA Tech Solutions Office Location Map"
+                    src={companyInfo.location.embedMapUrl}
+                    width="100%"
+                    height="210"
+                    style={{ border: 0 }}
+                    allowFullScreen=""
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    className="map-iframe"
+                  />
+                </div>
+
                 <div className="map-card-footer">
-                  <span>MSME Registered Enterprise | Online Sessions & Corporate Training</span>
+                  <div className="map-footer-text">
+                    <span className="map-footer-badge">📍 Chennai, India</span>
+                    <span className="map-footer-sub">MPM Street, Kakkanji Colony, Chennai 600039</span>
+                  </div>
+                  <a
+                    href={companyInfo.location.mapsUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn btn-primary btn-sm map-directions-btn"
+                  >
+                    <span>Get Directions</span>
+                    <ArrowRight size={14} aria-hidden="true" />
+                  </a>
                 </div>
               </div>
             </div>

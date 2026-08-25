@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { NavLink, useLocation, Link } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import { Menu, X, ArrowRight, GraduationCap, Phone } from 'lucide-react';
 import BrandLogo from '../BrandLogo/BrandLogo';
 import { companyInfo } from '../../../data/company';
+import { useEnrollmentModal } from '../../../context/EnrollmentContext';
 import './Navbar.css';
 
 export default function Navbar() {
@@ -10,6 +11,7 @@ export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
   const mobileNavRef = useRef(null);
+  const { openEnrollmentModal } = useEnrollmentModal();
 
   // Close mobile menu on route change
   useEffect(() => {
@@ -76,10 +78,16 @@ export default function Navbar() {
 
         {/* Primary Desktop Action CTA */}
         <div className="navbar-actions">
-          <Link to="/enrollment" className="nav-enroll-btn">
+          <button
+            type="button"
+            className="nav-enroll-btn"
+            onClick={(e) => openEnrollmentModal('', e.currentTarget)}
+            aria-haspopup="dialog"
+            aria-label="Open course enrollment application modal"
+          >
             <GraduationCap size={16} aria-hidden="true" />
             <span>Enroll Now</span>
-          </Link>
+          </button>
 
           {/* Mobile Menu Toggle Button */}
           <button
@@ -141,14 +149,19 @@ export default function Navbar() {
         </nav>
 
         <div className="mobile-drawer-footer">
-          <Link
-            to="/enrollment"
+          <button
+            type="button"
             className="btn btn-primary btn-lg mobile-cta-btn"
-            onClick={() => setMobileMenuOpen(false)}
+            onClick={(e) => {
+              setMobileMenuOpen(false);
+              openEnrollmentModal('', e.currentTarget);
+            }}
+            aria-haspopup="dialog"
+            aria-label="Open course enrollment application modal"
           >
-            <GraduationCap size={18} />
+            <GraduationCap size={18} aria-hidden="true" />
             <span>Enroll in a Course</span>
-          </Link>
+          </button>
           <div className="mobile-drawer-contact-links">
             <a href={`tel:${companyInfo.contact.phone.replace(/[^0-9+]/g, '')}`} className="mobile-contact-pill">
               <Phone size={14} />

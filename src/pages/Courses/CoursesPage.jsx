@@ -4,6 +4,7 @@ import { Clock, BarChart, Calendar, Search, ArrowRight, CheckCircle2, Graduation
 import SectionHeader from '../../components/common/SectionHeader/SectionHeader';
 import FinalCTA from '../../components/home/FinalCTA/FinalCTA';
 import { coursesData } from '../../data/courses';
+import { useEnrollmentModal } from '../../context/EnrollmentContext';
 import './CoursesPage.css';
 
 const categories = ["All Programs", "Software Development", "Cloud & Infrastructure", "Design & Product", "Data & AI"];
@@ -18,6 +19,7 @@ const iconByCat = {
 export default function CoursesPage() {
   const [selectedCategory, setSelectedCategory] = useState("All Programs");
   const [searchQuery, setSearchQuery] = useState("");
+  const { openEnrollmentModal } = useEnrollmentModal();
 
   const filteredCourses = coursesData.filter((course) => {
     const matchesCategory = selectedCategory === "All Programs" || course.category === selectedCategory;
@@ -129,10 +131,16 @@ export default function CoursesPage() {
                         <Link to={`/courses/${course.id}`} className="btn btn-outline btn-sm">
                           Curriculum
                         </Link>
-                        <Link to={`/enrollment?course=${course.id}`} className="btn btn-primary btn-sm">
+                        <button
+                          type="button"
+                          onClick={(e) => openEnrollmentModal(course.id, e.currentTarget)}
+                          className="btn btn-primary btn-sm"
+                          aria-haspopup="dialog"
+                          aria-label={`Enroll in ${course.title}`}
+                        >
                           <span>Enroll</span>
                           <ArrowRight size={14} aria-hidden="true" />
-                        </Link>
+                        </button>
                       </div>
                     </div>
                   </div>

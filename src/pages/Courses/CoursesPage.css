@@ -181,8 +181,11 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 1rem;
   padding-top: 1.25rem;
   border-top: 1px solid rgba(21, 101, 192, 0.08);
+  margin-top: auto;
+  flex-wrap: wrap;
 }
 
 .course-fee-info {
@@ -206,7 +209,14 @@
 
 .course-listing-actions {
   display: flex;
+  align-items: center;
   gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.course-listing-actions .btn {
+  padding: 0.55rem 0.85rem;
+  font-size: 0.8rem;
 }
 
 .no-courses-found {

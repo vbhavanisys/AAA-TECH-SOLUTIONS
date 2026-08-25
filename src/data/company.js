@@ -6,8 +6,28 @@ export const companyInfo = {
   contact: {
     email: "contact@aaatechsolutions.com",
     phone: "+1 (555) 019-2834",
-    address: "Technology Park, Suite 400, Innovation District",
-    hours: "Monday – Friday: 9:00 AM – 6:00 PM (EST)"
+    whatsapp: "917358533721",
+    address: "MPM Street, Kakkanji Colony, Chennai, Tamil Nadu 600039, India",
+    hours: "Monday – Friday: 9:00 AM – 6:00 PM (IST)"
+  },
+  location: {
+    addressLine1: "MPM Street",
+    addressLine2: "MPM தெரு",
+    area: "Kakkanji Colony",
+    city: "Chennai, Greater Chennai",
+    state: "Tamil Nadu",
+    postalCode: "600039",
+    country: "India",
+    mapsUrl: "https://maps.app.goo.gl/dcDFjnECe8EhUAHJ9",
+    embedMapUrl: "https://maps.google.com/maps?q=MPM+Street,+Kakkanji+Colony,+Chennai,+Tamil+Nadu+600039,+India&t=&z=16&ie=UTF8&iwloc=&output=embed",
+    formattedLines: [
+      "MPM Street",
+      "MPM தெரு",
+      "Kakkanji Colony",
+      "Chennai, Greater Chennai",
+      "Tamil Nadu 600039",
+      "India"
+    ]
   },
   social: [
     { label: "LinkedIn", url: "https://linkedin.com", icon: "Linkedin" },
