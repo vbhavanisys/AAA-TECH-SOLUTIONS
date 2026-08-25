@@ -87,12 +87,27 @@
   gap: 0.5rem;
 }
 
+.direct-contact-link {
+  text-decoration: none;
+  color: inherit;
+  transition: all var(--transition-fast);
+}
+
+.direct-contact-link:hover {
+  color: #FFFFFF;
+}
+
+.direct-contact-link:hover strong {
+  color: var(--cyan);
+}
+
 .direct-icon {
   color: var(--cyan);
 }
 
 .direct-contact-item strong {
   color: #FFFFFF;
+  transition: color var(--transition-fast);
 }
 
 @media (max-width: 768px) {

@@ -5,7 +5,7 @@ export const companyInfo = {
   shortDescription: "AAA Tech Solutions delivers practical software engineering, cloud architecture, and industry-focused professional learning designed around real-world business needs.",
   contact: {
     email: "contact@aaatechsolutions.com",
-    phone: "+1 (555) 019-2834",
+    phone: "+91 73585 33721",
     whatsapp: "917358533721",
     address: "MPM Street, Kakkanji Colony, Chennai, Tamil Nadu 600039, India",
     hours: "Monday – Friday: 9:00 AM – 6:00 PM (IST)"

@@ -33,14 +33,14 @@ export default function FinalCTA() {
             </div>
 
             <div className="final-cta-direct">
-              <div className="direct-contact-item">
+              <a href={`mailto:${companyInfo.contact.email}`} className="direct-contact-item direct-contact-link">
                 <Mail size={15} className="direct-icon" aria-hidden="true" />
                 <span>Email: <strong>{companyInfo.contact.email}</strong></span>
-              </div>
-              <div className="direct-contact-item">
+              </a>
+              <a href={`tel:${companyInfo.contact.phone.replace(/[^0-9+]/g, '')}`} className="direct-contact-item direct-contact-link">
                 <PhoneCall size={15} className="direct-icon" aria-hidden="true" />
                 <span>Phone: <strong>{companyInfo.contact.phone}</strong></span>
-              </div>
+              </a>
             </div>
           </div>
         </div>
