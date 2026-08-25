@@ -46,7 +46,7 @@ export default function EnrollmentPage() {
     const errors = {};
     if (!formData.fullName.trim()) errors.fullName = 'Please enter your full name.';
     if (!formData.email.trim() || !/^\S+@\S+\.\S+$/.test(formData.email)) errors.email = 'Please provide a valid email address.';
-    if (!formData.phone.trim()) errors.phone = 'Please provide a contact phone number.';
+    if (!formData.phone.trim() || formData.phone.length < 7) errors.phone = 'Please provide a valid contact phone number.';
     if (!formData.agreeTerms) errors.agreeTerms = 'You must agree to the enrollment terms.';
     return errors;
   };
@@ -59,12 +59,20 @@ export default function EnrollmentPage() {
       return;
     }
 
-    // Generate local reference code for admissions tracking
     const generatedId = `AAA-ENR-${Math.floor(100000 + Math.random() * 900000)}`;
     setRefId(generatedId);
     setSubmitted(true);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
+
+  const dynamicWaUrl = `https://wa.me/917358533721?text=${encodeURIComponent(
+    `🎓 *New Enrollment Enquiry — AAA Tech Solutions*\n\n` +
+    `👤 *Name:* ${formData.fullName || 'Prospective Student'}\n` +
+    `📱 *Phone:* ${formData.phone || 'Not provided'}\n` +
+    `✉️ *Email:* ${formData.email || 'Not provided'}\n` +
+    `📚 *Program:* ${selectedCourseObj.title}\n` +
+    `💬 *Notes:* ${formData.goals || 'Interested in batch details and schedule.'}`
+  )}`;
 
   return (
     <div className="enrollment-page-view">
@@ -72,14 +80,14 @@ export default function EnrollmentPage() {
       <section className="enrollment-hero-section">
         <div className="container">
           <div className="enrollment-hero-content">
-            <span className="section-tag">Cohort Application & Registration</span>
+            <span className="section-tag section-tag-dark">🎓 Admissions & Enrollment</span>
             <h1 className="enrollment-hero-title">
-              {submitted ? 'Enrollment Application Received' : 'Apply for AAA Tech Solutions Academy'}
+              {submitted ? 'Enrollment Application Received' : 'Apply for AAA Tech Solutions Cohorts'}
             </h1>
             <p className="enrollment-hero-lead">
               {submitted
-                ? 'Thank you for applying. Our admissions team has logged your submission and will review your technical profile.'
-                : 'Complete the application below to secure your seat in our upcoming engineering cohort.'}
+                ? 'Thank you for applying. Our admissions and technical mentoring team will review your application.'
+                : 'Complete the application below to secure your seat in our upcoming live mentor-guided cohort.'}
             </p>
           </div>
         </div>
@@ -108,7 +116,7 @@ export default function EnrollmentPage() {
                         name="fullName"
                         value={formData.fullName}
                         onChange={handleInputChange}
-                        placeholder="e.g. Alex Morgan"
+                        placeholder="e.g. Priya Sharma"
                         className={`form-input ${formErrors.fullName ? 'input-error' : ''}`}
                         required
                       />
@@ -130,7 +138,7 @@ export default function EnrollmentPage() {
                           name="email"
                           value={formData.email}
                           onChange={handleInputChange}
-                          placeholder="alex@example.com"
+                          placeholder="priya@example.com"
                           className={`form-input ${formErrors.email ? 'input-error' : ''}`}
                           required
                         />
@@ -140,7 +148,7 @@ export default function EnrollmentPage() {
 
                     <div className="form-group">
                       <label htmlFor="phone" className="form-label">
-                        Phone Number <span className="req">*</span>
+                        Phone / WhatsApp <span className="req">*</span>
                       </label>
                       <div className="input-with-icon">
                         <Phone size={16} className="input-icon" />
@@ -150,7 +158,7 @@ export default function EnrollmentPage() {
                           name="phone"
                           value={formData.phone}
                           onChange={handleInputChange}
-                          placeholder="+1 (555) 000-0000"
+                          placeholder="+91 98765 43210"
                           className={`form-input ${formErrors.phone ? 'input-error' : ''}`}
                           required
                         />
@@ -196,11 +204,11 @@ export default function EnrollmentPage() {
                         onChange={handleInputChange}
                         className="form-input form-select"
                       >
-                        <option value="Bachelor's Degree (Computer Science / Tech)">Bachelor's Degree (CS / STEM)</option>
+                        <option value="Bachelor's Degree (Computer Science / Tech)">Bachelor's Degree (CS / Tech)</option>
                         <option value="Bachelor's Degree (Other Discipline)">Bachelor's Degree (Other)</option>
                         <option value="Master's Degree or Higher">Master's Degree or Higher</option>
-                        <option value="Associate Degree / Diploma">Associate Degree / Diploma</option>
-                        <option value="Self-Taught / Industry Working Professional">Working Industry Professional</option>
+                        <option value="Associate Degree / Diploma">Diploma / Vocational</option>
+                        <option value="Self-Taught / Industry Working Professional">Working Professional</option>
                       </select>
                     </div>
                   </div>
@@ -208,7 +216,7 @@ export default function EnrollmentPage() {
                   {/* Learning Goals */}
                   <div className="form-group">
                     <label htmlFor="goals" className="form-label">
-                      Learning Objectives or Project Background (Optional)
+                      Questions or Learning Objectives (Optional)
                     </label>
                     <textarea
                       id="goals"
@@ -216,7 +224,7 @@ export default function EnrollmentPage() {
                       rows="3"
                       value={formData.goals}
                       onChange={handleInputChange}
-                      placeholder="Briefly describe your career goals or current software background..."
+                      placeholder="Briefly describe your career goals or specific questions..."
                       className="form-input form-textarea"
                     ></textarea>
                   </div>
@@ -230,15 +238,21 @@ export default function EnrollmentPage() {
                         checked={formData.agreeTerms}
                         onChange={handleInputChange}
                       />
-                      <span>I agree to the <Link to="/terms-and-conditions" target="_blank">Academy Enrollment Guidelines</Link> and <Link to="/privacy-policy" target="_blank">Privacy Policy</Link>.</span>
+                      <span>I agree to the <Link to="/terms" target="_blank">Enrollment Guidelines</Link> and <Link to="/privacy-policy" target="_blank">Privacy Policy</Link>.</span>
                     </label>
                     {formErrors.agreeTerms && <span className="error-text">{formErrors.agreeTerms}</span>}
                   </div>
 
-                  <button type="submit" className="btn btn-primary btn-lg submit-enroll-btn">
-                    Submit Enrollment Application
-                    <ArrowRight size={18} aria-hidden="true" />
-                  </button>
+                  <div className="form-buttons-group">
+                    <button type="submit" className="btn btn-primary btn-lg submit-enroll-btn">
+                      <span>Submit Enrollment Application</span>
+                      <ArrowRight size={18} aria-hidden="true" />
+                    </button>
+                    <a href={dynamicWaUrl} target="_blank" rel="noopener noreferrer" className="btn btn-wa btn-lg enroll-wa-direct">
+                      <MessageSquare size={18} />
+                      <span>Or Enquire Directly on WhatsApp</span>
+                    </a>
+                  </div>
                 </form>
               </div>
 
@@ -272,7 +286,7 @@ export default function EnrollmentPage() {
 
                   <div className="summary-note">
                     <AlertCircle size={15} className="summary-note-icon" />
-                    <p>Applications are reviewed on a rolling basis. No payment is required until interview confirmation.</p>
+                    <p>MSME Registered Enterprise | Cohorts are strictly limited to ensure 1-on-1 mentorship.</p>
                   </div>
                 </div>
               </div>
@@ -284,10 +298,10 @@ export default function EnrollmentPage() {
                 <div className="confirmation-icon-box">
                   <CheckCircle2 size={48} className="confirm-icon" />
                 </div>
-                <span className="confirmation-tag">Application Submitted Successfully</span>
-                <h2 className="confirm-title">Registration Acknowledgment</h2>
+                <span className="confirmation-tag">Application Received</span>
+                <h2 className="confirm-title">Registration Acknowledged</h2>
                 <p className="confirm-desc">
-                  Your application for <strong>{selectedCourseObj.title}</strong> has been registered with the AAA Tech Solutions Admissions Office.
+                  Thank you, <strong>{formData.fullName}</strong>. Your enrollment application for <strong>{selectedCourseObj.title}</strong> has been logged with the Admissions Office.
                 </p>
 
                 <div className="confirmation-ref-box">
@@ -297,7 +311,7 @@ export default function EnrollmentPage() {
 
                 <div className="confirm-details-grid">
                   <div className="confirm-detail-box">
-                    <span className="detail-label">Candidate</span>
+                    <span className="detail-label">Candidate Name</span>
                     <span className="detail-value">{formData.fullName}</span>
                   </div>
                   <div className="confirm-detail-box">
@@ -305,16 +319,20 @@ export default function EnrollmentPage() {
                     <span className="detail-value">{formData.email}</span>
                   </div>
                   <div className="confirm-detail-box">
-                    <span className="detail-label">Program Duration</span>
-                    <span className="detail-value">{selectedCourseObj.duration}</span>
+                    <span className="detail-label">Program Track</span>
+                    <span className="detail-value">{selectedCourseObj.title}</span>
                   </div>
                   <div className="confirm-detail-box">
                     <span className="detail-label">Admissions Review</span>
-                    <span className="detail-value">Within 1–2 Business Days</span>
+                    <span className="detail-value">Within 24 Hours</span>
                   </div>
                 </div>
 
                 <div className="confirmation-actions">
+                  <a href={dynamicWaUrl} target="_blank" rel="noopener noreferrer" className="btn btn-wa btn-lg">
+                    <MessageSquare size={18} />
+                    <span>WhatsApp Us for Faster Response</span>
+                  </a>
                   <Link to="/" className="btn btn-primary">
                     Return to Home
                   </Link>

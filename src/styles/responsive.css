@@ -3,7 +3,7 @@
 /* Large Desktop (1440px and up) */
 @media (min-width: 1440px) {
   :root {
-    --container-max-width: 1280px;
+    --container-max-width: 1240px;
   }
 }
 
@@ -17,8 +17,8 @@
 /* Tablet (768px to 1023px) */
 @media (max-width: 1023px) {
   .section {
-    padding-top: var(--space-14);
-    padding-bottom: var(--space-14);
+    padding-top: 70px;
+    padding-bottom: 70px;
   }
 
   .grid-3 {
@@ -37,24 +37,24 @@
   }
 
   .section {
-    padding-top: var(--space-10);
-    padding-bottom: var(--space-10);
+    padding-top: 60px;
+    padding-bottom: 60px;
   }
 
   .section-header {
-    margin-bottom: var(--space-8);
+    margin-bottom: 2rem;
   }
 
   .grid-2,
   .grid-3,
   .grid-4 {
     grid-template-columns: 1fr;
-    gap: var(--space-4);
+    gap: 1.25rem;
   }
 
   .btn-lg {
-    padding: 0.75rem 1.25rem;
-    font-size: var(--text-sm);
+    padding: 0.8rem 1.6rem;
+    font-size: 0.9rem;
   }
 
   .hero-cta-group {
@@ -74,14 +74,14 @@
   }
 
   h1 {
-    font-size: 1.85rem;
+    font-size: 1.75rem;
   }
 
   h2 {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
   }
 
   .card {
-    padding: var(--space-4);
+    padding: 1.25rem;
   }
 }

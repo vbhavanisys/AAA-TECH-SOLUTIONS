@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Target, Compass, Award, Users, CheckCircle, ShieldCheck, ArrowRight } from 'lucide-react';
+import { Target, Compass, Award, Users, CheckCircle2, ShieldCheck, ArrowRight } from 'lucide-react';
 import SectionHeader from '../../components/common/SectionHeader/SectionHeader';
 import FinalCTA from '../../components/home/FinalCTA/FinalCTA';
 import './AboutPage.css';
@@ -12,7 +12,7 @@ export default function AboutPage() {
       <section className="about-hero-section">
         <div className="container">
           <div className="about-hero-content">
-            <span className="section-tag">About AAA Tech Solutions</span>
+            <span className="section-tag section-tag-dark">🏛️ About AAA Tech Solutions</span>
             <h1 className="about-hero-title">
               Engineering reliable software systems and cultivating industry-ready engineers.
             </h1>
@@ -27,9 +27,9 @@ export default function AboutPage() {
       <section className="section about-mission-section">
         <div className="container">
           <div className="mission-vision-grid">
-            <div className="mv-card">
+            <div className="mv-card card">
               <div className="mv-icon-wrapper">
-                <Target size={24} className="mv-icon" aria-hidden="true" />
+                <Target size={26} className="mv-icon" aria-hidden="true" />
               </div>
               <h2 className="mv-title">Our Mission</h2>
               <p className="mv-desc">
@@ -37,9 +37,9 @@ export default function AboutPage() {
               </p>
             </div>
 
-            <div className="mv-card">
+            <div className="mv-card card">
               <div className="mv-icon-wrapper">
-                <Compass size={24} className="mv-icon" aria-hidden="true" />
+                <Compass size={26} className="mv-icon" aria-hidden="true" />
               </div>
               <h2 className="mv-title">Our Vision</h2>
               <p className="mv-desc">
@@ -54,13 +54,13 @@ export default function AboutPage() {
       <section className="section about-values-section section-muted">
         <div className="container">
           <SectionHeader
-            tag="Guiding Principles"
+            tag="⭐ Guiding Principles"
             title="Our Core Operating Values"
             subtitle="These values govern how we write code, structure client engagements, and mentor learners."
           />
 
           <div className="values-grid">
-            <div className="value-card">
+            <div className="value-card card">
               <div className="value-number">01</div>
               <h3 className="value-title">Engineering Rigor</h3>
               <p className="value-desc">
@@ -68,7 +68,7 @@ export default function AboutPage() {
               </p>
             </div>
 
-            <div className="value-card">
+            <div className="value-card card">
               <div className="value-number">02</div>
               <h3 className="value-title">Transparent Partnership</h3>
               <p className="value-desc">
@@ -76,7 +76,7 @@ export default function AboutPage() {
               </p>
             </div>
 
-            <div className="value-card">
+            <div className="value-card card">
               <div className="value-number">03</div>
               <h3 className="value-title">Practical Outcomes</h3>
               <p className="value-desc">
@@ -84,7 +84,7 @@ export default function AboutPage() {
               </p>
             </div>
 
-            <div className="value-card">
+            <div className="value-card card">
               <div className="value-number">04</div>
               <h3 className="value-title">Continuous Mentorship</h3>
               <p className="value-desc">
@@ -101,7 +101,7 @@ export default function AboutPage() {
           <div className="standards-layout">
             <div className="standards-info">
               <SectionHeader
-                tag="Technical Standards"
+                tag="🛡️ Technical Standards"
                 title="How We Maintain Engineering Consistency"
                 align="left"
               />
@@ -110,33 +110,33 @@ export default function AboutPage() {
               </p>
               <ul className="standards-checklist">
                 <li className="standards-item">
-                  <CheckCircle size={18} className="standards-check" />
+                  <CheckCircle2 size={18} className="standards-check" />
                   <span><strong>Modular Architecture:</strong> Decoupled layers for maintainability and seamless team collaboration.</span>
                 </li>
                 <li className="standards-item">
-                  <CheckCircle size={18} className="standards-check" />
+                  <CheckCircle2 size={18} className="standards-check" />
                   <span><strong>Security by Design:</strong> Adherence to OWASP standards, role-based access control, and encrypted data layers.</span>
                 </li>
                 <li className="standards-item">
-                  <CheckCircle size={18} className="standards-check" />
+                  <CheckCircle2 size={18} className="standards-check" />
                   <span><strong>Accessible & Responsive UI:</strong> WCAG 2.1 compliant design systems engineered for all device form factors.</span>
                 </li>
                 <li className="standards-item">
-                  <CheckCircle size={18} className="standards-check" />
+                  <CheckCircle2 size={18} className="standards-check" />
                   <span><strong>Automated Testing & CI/CD:</strong> Consistent integration pipelines ensuring zero regressions in production.</span>
                 </li>
               </ul>
             </div>
 
-            <div className="standards-callout-card">
-              <ShieldCheck size={36} className="callout-icon" />
+            <div className="standards-callout-card card">
+              <ShieldCheck size={40} className="callout-icon" />
               <h3 className="callout-title">Commitment to Quality</h3>
               <p className="callout-desc">
                 We never ship code we aren't proud to support. Our engineering practices ensure longevity, clear ownership, and scalable growth for your product.
               </p>
               <div className="callout-actions">
                 <Link to="/contact" className="btn btn-primary btn-sm">
-                  Talk to Our Engineering Team
+                  <span>Talk to Our Engineering Team</span>
                   <ArrowRight size={14} />
                 </Link>
               </div>

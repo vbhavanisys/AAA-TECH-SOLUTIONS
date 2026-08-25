@@ -10,9 +10,9 @@ export default function ProjectsPreview() {
     <section className="section projects-preview-section" id="projects-preview" aria-label="Selected Projects">
       <div className="container">
         <SectionHeader
-          tag="Selected Projects"
-          title="Proven Deliverables Across High-Impact Industries"
-          subtitle="Explore a selection of mission-critical systems and digital architectures engineered by our team."
+          tag="🚀 Selected Deliverables"
+          title="Proven Software Architectures Across Industries"
+          subtitle="Explore a selection of mission-critical systems and digital platforms engineered by our team."
         />
 
         <div className="projects-grid">
@@ -51,7 +51,7 @@ export default function ProjectsPreview() {
 
         <div className="projects-bottom-cta">
           <Link to="/projects" className="btn btn-secondary btn-lg">
-            View All Selected Works
+            <span>View All Selected Works</span>
             <ArrowRight size={16} aria-hidden="true" />
           </Link>
         </div>

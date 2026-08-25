@@ -6,6 +6,7 @@ import CoursesPreview from '../../components/home/CoursesPreview/CoursesPreview'
 import WhyChooseUs from '../../components/home/WhyChooseUs/WhyChooseUs';
 import ProjectsPreview from '../../components/home/ProjectsPreview/ProjectsPreview';
 import WorkingApproach from '../../components/home/WorkingApproach/WorkingApproach';
+import ReviewsSection from '../../components/home/ReviewsSection/ReviewsSection';
 import FinalCTA from '../../components/home/FinalCTA/FinalCTA';
 
 export default function HomePage() {
@@ -18,6 +19,7 @@ export default function HomePage() {
       <WhyChooseUs />
       <ProjectsPreview />
       <WorkingApproach />
+      <ReviewsSection />
       <FinalCTA />
     </div>
   );

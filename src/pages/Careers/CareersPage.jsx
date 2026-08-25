@@ -22,7 +22,7 @@ export default function CareersPage() {
       <section className="careers-hero-section">
         <div className="container">
           <div className="careers-hero-content">
-            <span className="section-tag">Careers at AAA Tech Solutions</span>
+            <span className="section-tag section-tag-dark">💼 Engineering Careers</span>
             <h1 className="careers-hero-title">
               Work with craftsmen who care about code quality, architecture, and education.
             </h1>
@@ -37,7 +37,7 @@ export default function CareersPage() {
       <section className="section section-muted careers-culture-section">
         <div className="container">
           <SectionHeader
-            tag="Why Join Our Team"
+            tag="⭐ Why Join Our Team"
             title="Our Engineering Environment"
             subtitle="We foster an environment centered around high standards, continuous learning, and direct impact."
           />
@@ -69,8 +69,8 @@ export default function CareersPage() {
       <section className="section careers-jobs-section">
         <div className="container">
           <SectionHeader
-            tag="Current Opportunities"
-            title="Open Engineering & Academy Roles"
+            tag="🚀 Open Positions"
+            title="Current Engineering & Academy Roles"
             subtitle="Explore our active openings. If your experience matches our standard, we would love to connect."
           />
 
@@ -92,7 +92,7 @@ export default function CareersPage() {
                     className="btn btn-primary btn-sm"
                     onClick={() => { setSelectedJob(job); setApplicationSent(false); }}
                   >
-                    Apply for Position
+                    <span>Apply for Position</span>
                     <ArrowRight size={14} aria-hidden="true" />
                   </button>
                 </div>
@@ -182,7 +182,7 @@ export default function CareersPage() {
                 </div>
 
                 <button type="submit" className="btn btn-primary btn-lg submit-job-btn">
-                  Submit Application
+                  <span>Submit Application</span>
                   <Send size={16} aria-hidden="true" />
                 </button>
               </form>

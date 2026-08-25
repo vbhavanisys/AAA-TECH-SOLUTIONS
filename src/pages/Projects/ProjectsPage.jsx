@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { FolderGit2, TrendingUp, ArrowRight, ShieldCheck, CheckCircle } from 'lucide-react';
+import { FolderGit2, TrendingUp, ArrowRight, ShieldCheck, CheckCircle2 } from 'lucide-react';
 import SectionHeader from '../../components/common/SectionHeader/SectionHeader';
 import FinalCTA from '../../components/home/FinalCTA/FinalCTA';
 import { projectsData } from '../../data/projects';
@@ -21,7 +21,7 @@ export default function ProjectsPage() {
       <section className="projects-hero-section">
         <div className="container">
           <div className="projects-hero-content">
-            <span className="section-tag">Case Studies & Deliverables</span>
+            <span className="section-tag section-tag-dark">🚀 Case Studies & Deliverables</span>
             <h1 className="projects-hero-title">
               Mission-critical software architectures engineered for scale.
             </h1>
@@ -76,7 +76,7 @@ export default function ProjectsPage() {
 
                 <div className="project-detail-actions">
                   <Link to="/contact" className="btn btn-primary btn-sm">
-                    Discuss a Similar Project
+                    <span>Discuss a Similar Project</span>
                     <ArrowRight size={14} aria-hidden="true" />
                   </Link>
                 </div>

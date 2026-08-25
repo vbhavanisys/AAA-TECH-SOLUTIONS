@@ -21,7 +21,7 @@ export default function BlogPage() {
       <section className="blog-hero-section">
         <div className="container">
           <div className="blog-hero-content">
-            <span className="section-tag">Engineering Knowledge Base</span>
+            <span className="section-tag section-tag-dark">📖 Engineering Knowledge Base</span>
             <h1 className="blog-hero-title">
               Technical insights, system design patterns, and engineering notes.
             </h1>

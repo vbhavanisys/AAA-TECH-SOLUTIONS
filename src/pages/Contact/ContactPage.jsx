@@ -35,7 +35,17 @@ export default function ContactPage() {
     }
 
     setSubmitted(true);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
+
+  const dynamicWaUrl = `https://wa.me/917358533721?text=${encodeURIComponent(
+    `💬 *New Inquiry — AAA Tech Solutions*\n\n` +
+    `👤 *Name:* ${formData.name || 'Client'}\n` +
+    `📱 *Phone:* ${formData.phone || 'Not provided'}\n` +
+    `✉️ *Email:* ${formData.email || 'Not provided'}\n` +
+    `📌 *Type:* ${formData.inquiryType}\n` +
+    `📝 *Message:* ${formData.message || 'I would like to discuss our requirements.'}`
+  )}`;
 
   return (
     <div className="contact-page-view">
@@ -43,12 +53,12 @@ export default function ContactPage() {
       <section className="contact-hero-section">
         <div className="container">
           <div className="contact-hero-content">
-            <span className="section-tag">Direct Inquiries & Consultation</span>
+            <span className="section-tag section-tag-dark">📞 Connect With Us</span>
             <h1 className="contact-hero-title">
-              Let's discuss your technical vision or corporate training roadmap.
+              Let's discuss your technical vision or training requirements.
             </h1>
             <p className="contact-hero-lead">
-              Reach out to our engineering leads directly. We provide architectural assessments, technical proposals, and cohort onboarding guidance.
+              Reach out to our team directly. We provide architectural assessments, technical proposals, and cohort onboarding guidance.
             </p>
           </div>
         </div>
@@ -58,10 +68,10 @@ export default function ContactPage() {
       <section className="section contact-main-section">
         <div className="container">
           <div className="contact-layout-grid">
-            {/* Left: Contact Info & Map placeholder */}
+            {/* Left: Contact Info & WhatsApp */}
             <div className="contact-info-column">
               <div className="contact-details-card card">
-                <h2 className="info-card-title">Corporate Headquarters</h2>
+                <h2 className="info-card-title">Corporate Headquarters & Inquiries</h2>
                 <p className="info-card-sub">Direct channels for clients, partners, and learners.</p>
 
                 <div className="info-items-list">
@@ -109,6 +119,14 @@ export default function ContactPage() {
                     </div>
                   </div>
                 </div>
+
+                <div className="contact-wa-action-box">
+                  <a href={dynamicWaUrl} target="_blank" rel="noopener noreferrer" className="btn btn-wa btn-lg contact-wa-btn">
+                    <MessageSquare size={18} />
+                    <span>Chat Directly on WhatsApp</span>
+                  </a>
+                  <p className="wa-notice">⚡ Fast response on WhatsApp for quick course & project queries</p>
+                </div>
               </div>
 
               {/* Location Card */}
@@ -125,7 +143,7 @@ export default function ContactPage() {
                   <div className="map-grid-lines" aria-hidden="true"></div>
                 </div>
                 <div className="map-card-footer">
-                  <span>Visitor parking & technical laboratory access available.</span>
+                  <span>MSME Registered Enterprise | Online Sessions & Corporate Training</span>
                 </div>
               </div>
             </div>
@@ -136,7 +154,7 @@ export default function ContactPage() {
                 {!submitted ? (
                   <>
                     <h2 className="form-card-title">Send a Message</h2>
-                    <p className="form-card-sub">An engineering lead will respond within one business day.</p>
+                    <p className="form-card-sub">An engineering lead will review your requirements and respond promptly.</p>
 
                     <form onSubmit={handleSubmit} className="contact-form" noValidate>
                       <div className="form-group">
@@ -167,7 +185,7 @@ export default function ContactPage() {
                             name="email"
                             value={formData.email}
                             onChange={handleChange}
-                            placeholder="name@company.com"
+                            placeholder="name@example.com"
                             className={`form-input ${errors.email ? 'input-error' : ''}`}
                             required
                           />
@@ -176,7 +194,7 @@ export default function ContactPage() {
 
                         <div className="form-group">
                           <label htmlFor="contactPhone" className="form-label">
-                            Phone (Optional)
+                            Phone / WhatsApp (Optional)
                           </label>
                           <input
                             type="tel"
@@ -184,7 +202,7 @@ export default function ContactPage() {
                             name="phone"
                             value={formData.phone}
                             onChange={handleChange}
-                            placeholder="+1 (555) 000-0000"
+                            placeholder="+91 98765 43210"
                             className="form-input"
                           />
                         </div>
@@ -227,7 +245,7 @@ export default function ContactPage() {
                       </div>
 
                       <button type="submit" className="btn btn-primary btn-lg submit-contact-btn">
-                        Submit Technical Inquiry
+                        <span>Submit Technical Inquiry</span>
                         <Send size={16} aria-hidden="true" />
                       </button>
                     </form>

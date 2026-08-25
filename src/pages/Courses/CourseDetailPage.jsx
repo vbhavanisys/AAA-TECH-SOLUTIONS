@@ -1,6 +1,6 @@
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { ArrowLeft, Clock, BarChart, Calendar, CheckCircle2, ArrowRight, BookOpen, Layers, ShieldCheck, AlertCircle } from 'lucide-react';
+import { ArrowLeft, Clock, BarChart, Calendar, CheckCircle2, ArrowRight, BookOpen, Layers, ShieldCheck, AlertCircle, MessageSquare } from 'lucide-react';
 import { coursesData } from '../../data/courses';
 import FinalCTA from '../../components/home/FinalCTA/FinalCTA';
 import './CourseDetailPage.css';
@@ -8,6 +8,8 @@ import './CourseDetailPage.css';
 export default function CourseDetailPage() {
   const { id } = useParams();
   const course = coursesData.find((c) => c.id === id) || coursesData[0];
+
+  const waCourseUrl = `https://wa.me/917358533721?text=Hi%20AAA%20Tech%20Solutions%2C%20I%20am%20interested%20in%20the%20${encodeURIComponent(course.title)}%20program.`;
 
   return (
     <div className="course-detail-view">
@@ -29,7 +31,7 @@ export default function CourseDetailPage() {
         <div className="container">
           <div className="course-hero-grid">
             <div className="course-hero-main">
-              <span className="section-tag">{course.category}</span>
+              <span className="section-tag section-tag-dark">{course.category}</span>
               <h1 className="course-detail-h1">{course.title}</h1>
               <p className="course-detail-summary">{course.overview || course.shortDescription}</p>
 
@@ -82,13 +84,19 @@ export default function CourseDetailPage() {
                 </div>
               </div>
 
-              <Link to={`/enrollment?course=${course.id}`} className="btn btn-primary btn-lg sidebar-enroll-btn">
-                Enroll in this Cohort
-                <ArrowRight size={16} aria-hidden="true" />
-              </Link>
+              <div className="sidebar-actions-group">
+                <Link to={`/enrollment?course=${course.id}`} className="btn btn-primary btn-lg sidebar-enroll-btn">
+                  <span>Enroll in this Cohort</span>
+                  <ArrowRight size={16} aria-hidden="true" />
+                </Link>
+                <a href={waCourseUrl} target="_blank" rel="noopener noreferrer" className="btn btn-wa btn-lg sidebar-wa-btn">
+                  <MessageSquare size={16} />
+                  <span>Enquire on WhatsApp</span>
+                </a>
+              </div>
 
               <p className="sidebar-guarantee">
-                Limited cohort size (max 20 students) for focused mentorship.
+                ⭐ Mentored by active engineers. Limited batch size for focused guidance.
               </p>
             </div>
           </div>
@@ -121,7 +129,7 @@ export default function CourseDetailPage() {
                   <h2 className="block-title">Curriculum & Module Breakdown</h2>
                   <div className="syllabus-modules-list">
                     {course.syllabus.map((mod, idx) => (
-                      <div key={idx} className="syllabus-module-card">
+                      <div key={idx} className="syllabus-module-card card">
                         <div className="module-header">
                           <span className="module-number">{mod.module}</span>
                           <h3 className="module-title">{mod.title}</h3>
@@ -168,7 +176,7 @@ export default function CourseDetailPage() {
             <div className="course-nav-bottom">
               <Link to="/courses" className="btn btn-outline btn-sm">
                 <ArrowLeft size={14} aria-hidden="true" />
-                Back to All Courses
+                <span>Back to All Courses</span>
               </Link>
             </div>
           </div>

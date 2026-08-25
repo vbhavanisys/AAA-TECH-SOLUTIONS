@@ -5,7 +5,6 @@ import SectionHeader from '../../common/SectionHeader/SectionHeader';
 import { servicesData } from '../../../data/services';
 import './ServicesPreview.css';
 
-// Dynamic icon mapper
 const iconMap = {
   Globe: Globe,
   Code2: Code2,
@@ -17,11 +16,11 @@ const iconMap = {
 
 export default function ServicesPreview() {
   return (
-    <section className="section services-preview-section" id="services-preview" aria-label="Services Overview">
+    <section className="section services-preview-section section-muted" id="services-preview" aria-label="Services Overview">
       <div className="container">
         <SectionHeader
-          tag="Our Expertise"
-          title="Enterprise Technology & Software Services"
+          tag="💼 Enterprise Capabilities"
+          title="Custom Software & Cloud Engineering Services"
           subtitle="We design, engineer, and deploy high-performance software systems tailored to your specific organizational workflows."
         />
 
@@ -66,8 +65,8 @@ export default function ServicesPreview() {
           <p className="services-cta-text">
             Looking for a tailored architecture or specialized system integration?
           </p>
-          <Link to="/contact" className="btn btn-secondary">
-            Schedule a Technical Consultation
+          <Link to="/contact" className="btn btn-secondary btn-lg">
+            <span>Schedule a Technical Consultation</span>
             <ArrowRight size={16} aria-hidden="true" />
           </Link>
         </div>

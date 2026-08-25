@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Globe, Code2, Cloud, Layout, Smartphone, Cpu, CheckCircle, ArrowRight, ShieldCheck } from 'lucide-react';
+import { Globe, Code2, Cloud, Layout, Smartphone, Cpu, CheckCircle2, ArrowRight, ShieldCheck } from 'lucide-react';
 import SectionHeader from '../../components/common/SectionHeader/SectionHeader';
 import FinalCTA from '../../components/home/FinalCTA/FinalCTA';
 import { servicesData } from '../../data/services';
@@ -36,7 +36,7 @@ export default function ServicesPage() {
       <section className="services-hero-section">
         <div className="container">
           <div className="services-hero-content">
-            <span className="section-tag">Enterprise Technology Services</span>
+            <span className="section-tag section-tag-dark">💼 Enterprise Technology Services</span>
             <h1 className="services-hero-title">
               Software engineering and cloud architecture built around business objectives.
             </h1>
@@ -73,7 +73,7 @@ export default function ServicesPage() {
                     <ul className="deliverables-list">
                       {service.features.map((feature, idx) => (
                         <li key={idx} className="deliverable-item">
-                          <CheckCircle size={16} className="deliverable-check" aria-hidden="true" />
+                          <CheckCircle2 size={16} className="deliverable-check" aria-hidden="true" />
                           <span>{feature}</span>
                         </li>
                       ))}
@@ -82,7 +82,7 @@ export default function ServicesPage() {
 
                   <div className="service-detail-footer">
                     <Link to="/contact" className="btn btn-primary btn-sm">
-                      Request Technical Proposal
+                      <span>Request Technical Proposal</span>
                       <ArrowRight size={14} aria-hidden="true" />
                     </Link>
                   </div>
@@ -96,9 +96,9 @@ export default function ServicesPage() {
       {/* Standards & SLA Guarantee */}
       <section className="section section-muted services-sla-section">
         <div className="container">
-          <div className="sla-card">
+          <div className="sla-card card">
             <div className="sla-icon-wrapper">
-              <ShieldCheck size={32} className="sla-icon" />
+              <ShieldCheck size={36} className="sla-icon" />
             </div>
             <div className="sla-content">
               <h2 className="sla-title">Our Engineering & Delivery Commitments</h2>
@@ -107,8 +107,9 @@ export default function ServicesPage() {
               </p>
             </div>
             <div className="sla-action">
-              <Link to="/contact" className="btn btn-secondary">
-                Talk to a Principal Architect
+              <Link to="/contact" className="btn btn-secondary btn-lg">
+                <span>Talk to a Principal Architect</span>
+                <ArrowRight size={16} />
               </Link>
             </div>
           </div>

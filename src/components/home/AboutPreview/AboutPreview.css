@@ -1,97 +1,122 @@
 .about-preview-section {
-  background-color: var(--color-surface);
-  border-bottom: 1px solid var(--color-border);
+  background-color: #FFFFFF;
 }
 
 .about-preview-grid {
   display: grid;
-  grid-template-columns: 1fr 1.1fr;
-  gap: var(--space-12);
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
   align-items: center;
-}
-
-.about-preview-header {
-  margin-bottom: var(--space-6);
 }
 
 .about-preview-lead {
-  font-size: var(--text-lg);
+  font-size: 1.12rem;
   font-weight: 500;
-  color: var(--color-text-primary);
-  line-height: 1.5;
-  margin-bottom: var(--space-4);
+  color: var(--navy);
+  line-height: 1.65;
+  margin-bottom: 1.25rem;
 }
 
 .about-preview-text {
+  font-size: 0.95rem;
   color: var(--color-text-secondary);
-  line-height: 1.6;
-  margin-bottom: var(--space-8);
+  line-height: 1.75;
+  margin-bottom: 1.75rem;
 }
 
-.about-cta-wrapper {
+.about-highlights-list {
   display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+  padding: 1.25rem;
+  background: var(--color-light-bg);
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(21, 101, 192, 0.1);
 }
 
-/* Operational Pillars */
+.highlight-item {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--navy);
+}
+
+.highlight-check {
+  color: var(--blue);
+  flex-shrink: 0;
+}
+
 .about-pillars-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: var(--space-4);
+  gap: 1.25rem;
 }
 
 .pillar-card {
-  background-color: #FFFFFF;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
-  padding: var(--space-6);
-  transition: transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast);
-}
-
-.pillar-card:hover {
-  border-color: var(--color-border-hover);
-  box-shadow: var(--shadow-sm);
-  transform: translateY(-2px);
+  padding: 1.5rem;
+  background: #FFFFFF;
+  border: 1.5px solid rgba(21, 101, 192, 0.1);
+  border-radius: var(--radius-xl);
+  transition: all var(--transition-base);
 }
 
 .pillar-icon-box {
-  width: 44px;
-  height: 44px;
-  border-radius: var(--radius-sm);
-  background-color: var(--color-primary-subtle);
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: var(--space-4);
+  margin-bottom: 1.2rem;
 }
 
-.pillar-icon {
-  color: var(--color-primary);
+.icon-tech {
+  background: linear-gradient(135deg, rgba(21, 101, 192, 0.15), rgba(0, 180, 216, 0.1));
+  color: var(--blue);
+}
+
+.icon-academy {
+  background: linear-gradient(135deg, rgba(249, 168, 37, 0.15), rgba(255, 152, 0, 0.1));
+  color: var(--gold-dark);
+}
+
+.icon-exec {
+  background: linear-gradient(135deg, rgba(0, 180, 216, 0.15), rgba(30, 136, 229, 0.1));
+  color: var(--cyan);
+}
+
+.icon-shield {
+  background: linear-gradient(135deg, rgba(37, 211, 102, 0.15), rgba(18, 140, 126, 0.1));
+  color: var(--green-dark);
 }
 
 .pillar-title {
-  font-size: var(--text-base);
+  font-family: var(--font-display);
+  font-size: 1.05rem;
   font-weight: 700;
-  margin-bottom: var(--space-2);
-  color: var(--color-text-primary);
+  color: var(--navy);
+  margin-bottom: 0.5rem;
 }
 
 .pillar-desc {
-  font-size: var(--text-sm);
-  color: var(--color-text-secondary);
-  line-height: 1.5;
+  font-size: 0.84rem;
+  color: var(--color-text-muted);
+  line-height: 1.6;
   margin-bottom: 0;
 }
 
 @media (max-width: 1023px) {
   .about-preview-grid {
     grid-template-columns: 1fr;
-    gap: var(--space-8);
+    gap: 3rem;
   }
 }
 
 @media (max-width: 640px) {
   .about-pillars-grid {
     grid-template-columns: 1fr;
-    gap: var(--space-3);
   }
 }

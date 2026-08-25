@@ -15,6 +15,7 @@ import ContactPage from './pages/Contact/ContactPage';
 import PrivacyPolicyPage from './pages/Legal/PrivacyPolicyPage';
 import TermsPage from './pages/Legal/TermsPage';
 import PlaceholderPage from './pages/Placeholders/PlaceholderPage';
+import QuickChatBot from './components/common/QuickChatBot/QuickChatBot';
 import './styles/global.css';
 import './styles/responsive.css';
 
@@ -62,6 +63,7 @@ export default function App() {
           <Route path="*" element={<PlaceholderPage />} />
         </Routes>
       </main>
+      <QuickChatBot />
       <Footer />
     </BrowserRouter>
   );

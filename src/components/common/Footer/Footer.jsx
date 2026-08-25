@@ -1,11 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Mail, Phone, MapPin, Clock } from 'lucide-react';
+import { Mail, Phone, MapPin, Clock, Award, ShieldCheck } from 'lucide-react';
 import BrandLogo from '../BrandLogo/BrandLogo';
 import { companyInfo } from '../../../data/company';
 import './Footer.css';
 
-// Clean vector social icons
+// Vector social icons
 function LinkedInIcon() {
   return (
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -44,6 +44,12 @@ export default function Footer() {
           <p className="footer-brand-desc">
             {companyInfo.shortDescription}
           </p>
+
+          <div className="footer-msme-badge">
+            <ShieldCheck size={16} className="msme-icon" />
+            <span>MSME / Udyam Registered Enterprise</span>
+          </div>
+
           <div className="footer-contact-list">
             <div className="footer-contact-item">
               <MapPin size={16} className="footer-contact-icon" aria-hidden="true" />
@@ -115,13 +121,13 @@ export default function Footer() {
       <div className="footer-bottom">
         <div className="container footer-bottom-container">
           <div className="footer-copyright">
-            &copy; {currentYear} {companyInfo.legalName} All rights reserved.
+            &copy; {currentYear} <span>AAA Tech Solutions</span>. All rights reserved. | 100% Online & Enterprise Solutions
           </div>
 
           <div className="footer-bottom-links">
             <Link to="/privacy-policy" className="footer-bottom-link">Privacy Policy</Link>
             <span className="footer-bottom-divider" aria-hidden="true">&bull;</span>
-            <Link to="/terms" className="footer-bottom-link">Terms of Service</Link>
+            <Link to="/terms" className="footer-bottom-link">Terms & Conditions</Link>
           </div>
 
           <div className="footer-social-links" aria-label="Social media channels">

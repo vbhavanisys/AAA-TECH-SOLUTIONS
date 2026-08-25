@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { NavLink, useLocation, Link } from 'react-router-dom';
-import { Menu, X, ArrowRight } from 'lucide-react';
+import { Menu, X, ArrowRight, GraduationCap, Phone } from 'lucide-react';
 import BrandLogo from '../BrandLogo/BrandLogo';
 import { companyInfo } from '../../../data/company';
 import './Navbar.css';
@@ -16,7 +16,7 @@ export default function Navbar() {
     setMobileMenuOpen(false);
   }, [location.pathname]);
 
-  // Handle scroll detection for sticky navbar border
+  // Handle scroll detection for sticky navbar shadow
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 20) {
@@ -53,7 +53,7 @@ export default function Navbar() {
   return (
     <header className={`navbar-header ${isScrolled ? 'navbar-scrolled' : ''}`}>
       <div className="container navbar-container">
-        <BrandLogo />
+        <BrandLogo variant="navbar" />
 
         {/* Desktop Navigation Links */}
         <nav className="desktop-nav" aria-label="Main Navigation">
@@ -76,9 +76,9 @@ export default function Navbar() {
 
         {/* Primary Desktop Action CTA */}
         <div className="navbar-actions">
-          <Link to="/enrollment" className="btn btn-primary btn-sm">
-            Enroll Now
-            <ArrowRight size={15} aria-hidden="true" />
+          <Link to="/enrollment" className="nav-enroll-btn">
+            <GraduationCap size={16} aria-hidden="true" />
+            <span>Enroll Now</span>
           </Link>
 
           {/* Mobile Menu Toggle Button */}
@@ -109,7 +109,7 @@ export default function Navbar() {
         aria-hidden={!mobileMenuOpen}
       >
         <div className="mobile-drawer-header">
-          <BrandLogo />
+          <BrandLogo variant="dark" />
           <button
             type="button"
             className="mobile-close-btn"
@@ -146,12 +146,15 @@ export default function Navbar() {
             className="btn btn-primary btn-lg mobile-cta-btn"
             onClick={() => setMobileMenuOpen(false)}
           >
-            Enroll in a Course
-            <ArrowRight size={16} aria-hidden="true" />
+            <GraduationCap size={18} />
+            <span>Enroll in a Course</span>
           </Link>
-          <p className="mobile-drawer-contact">
-            Need consultation? <Link to="/contact">Speak with an engineer</Link>
-          </p>
+          <div className="mobile-drawer-contact-links">
+            <a href={`tel:${companyInfo.contact.phone.replace(/[^0-9+]/g, '')}`} className="mobile-contact-pill">
+              <Phone size={14} />
+              <span>{companyInfo.contact.phone}</span>
+            </a>
+          </div>
         </div>
       </div>
     </header>
