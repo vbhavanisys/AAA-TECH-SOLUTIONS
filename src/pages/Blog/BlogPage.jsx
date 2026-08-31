@@ -3,10 +3,11 @@ import { Link } from 'react-router-dom';
 import { Calendar, Clock, User, ArrowRight, BookOpen, Tag } from 'lucide-react';
 import SectionHeader from '../../components/common/SectionHeader/SectionHeader';
 import FinalCTA from '../../components/home/FinalCTA/FinalCTA';
+import Reveal from '../../components/common/Reveal/Reveal';
 import { blogPosts } from '../../data/blog';
 import './BlogPage.css';
 
-const categories = ["All Articles", "Design Systems", "Architecture", "DevOps & Cloud", "Data Engineering"];
+const categories = ["All Articles", "Python", "Java", "Data Analyst", "AI & ML", "AWS", "Placement Tips"];
 
 export default function BlogPage() {
   const [activeCategory, setActiveCategory] = useState("All Articles");
@@ -20,15 +21,15 @@ export default function BlogPage() {
       {/* Hero */}
       <section className="blog-hero-section">
         <div className="container">
-          <div className="blog-hero-content">
-            <span className="section-tag section-tag-dark">📖 Engineering Knowledge Base</span>
+          <Reveal className="blog-hero-content">
+            <span className="section-tag section-tag-dark">📖 Learning Resources & Career Tips</span>
             <h1 className="blog-hero-title">
-              Technical insights, system design patterns, and engineering notes.
+              Practical guidance to help you learn faster and get placed.
             </h1>
             <p className="blog-hero-lead">
-              Written by our practicing software engineers, cloud architects, and academy instructors.
+              Tips, tutorials, and career advice from the AAA Tech Solutions training team.
             </p>
-          </div>
+          </Reveal>
         </div>
       </section>
 
@@ -48,7 +49,7 @@ export default function BlogPage() {
             ))}
           </div>
 
-          <div className="blog-cards-grid">
+          <Reveal className="blog-cards-grid stagger-children">
             {filteredPosts.map((post) => (
               <article key={post.id} className="blog-card card">
                 <div className="blog-meta-top">
@@ -84,7 +85,7 @@ export default function BlogPage() {
                 </div>
               </article>
             ))}
-          </div>
+          </Reveal>
         </div>
       </section>
 

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Briefcase, MapPin, Clock, ArrowRight, CheckCircle2, Send, X, ShieldCheck } from 'lucide-react';
 import SectionHeader from '../../components/common/SectionHeader/SectionHeader';
 import FinalCTA from '../../components/home/FinalCTA/FinalCTA';
+import Reveal from '../../components/common/Reveal/Reveal';
 import { careersData } from '../../data/careers';
 import './CareersPage.css';
 
@@ -21,60 +22,60 @@ export default function CareersPage() {
       {/* Hero */}
       <section className="careers-hero-section">
         <div className="container">
-          <div className="careers-hero-content">
-            <span className="section-tag section-tag-dark">💼 Engineering Careers</span>
+          <Reveal className="careers-hero-content">
+            <span className="section-tag section-tag-dark">🎓 Internship Opportunities</span>
             <h1 className="careers-hero-title">
-              Work with craftsmen who care about code quality, architecture, and education.
+              Gain real experience with our online internship programs.
             </h1>
             <p className="careers-hero-lead">
-              Join an engineering team that solves difficult technical problems for enterprise clients while training the next generation of software professionals.
+              Work on practical tasks and real project work across our technical courses, with dedicated support and certification on completion.
             </p>
-          </div>
+          </Reveal>
         </div>
       </section>
 
-      {/* Values & Culture Pillars */}
+      {/* Why Intern With Us */}
       <section className="section section-muted careers-culture-section">
         <div className="container">
           <SectionHeader
-            tag="⭐ Why Join Our Team"
-            title="Our Engineering Environment"
-            subtitle="We foster an environment centered around high standards, continuous learning, and direct impact."
+            tag="⭐ Why Intern With Us"
+            title="What Our Internship Program Offers"
+            subtitle="A practical, supported way to apply what you're learning to real project work."
           />
 
-          <div className="grid-3">
+          <Reveal className="grid-3 stagger-children">
             <div className="culture-card card">
-              <h3 className="culture-title">Engineering Autonomy</h3>
+              <h3 className="culture-title">Practical, Hands-On Work</h3>
               <p className="culture-desc">
-                We value disciplined engineering judgment over bureaucratic process. You have direct input on architectural decisions and tooling.
+                Real practical tasks and project work, not just theory — so you leave with something concrete to show.
               </p>
             </div>
             <div className="culture-card card">
-              <h3 className="culture-title">Dual Impact: Build & Teach</h3>
+              <h3 className="culture-title">Mentorship & Guidance</h3>
               <p className="culture-desc">
-                Engage in both production client deliverables and academy mentorship, strengthening your technical leadership and industry profile.
+                Ongoing project completion support from our training team throughout your internship.
               </p>
             </div>
             <div className="culture-card card">
-              <h3 className="culture-title">Sustainable Cadence</h3>
+              <h3 className="culture-title">Certification on Completion</h3>
               <p className="culture-desc">
-                We believe great software is built through steady, predictable engineering sprints rather than frantic overtime and burnout.
+                Receive both an Internship Certificate and a Project Completion Certificate once you finish.
               </p>
             </div>
-          </div>
+          </Reveal>
         </div>
       </section>
 
-      {/* Open Positions List */}
+      {/* Internship Tracks List */}
       <section className="section careers-jobs-section">
         <div className="container">
           <SectionHeader
-            tag="🚀 Open Positions"
-            title="Current Engineering & Academy Roles"
-            subtitle="Explore our active openings. If your experience matches our standard, we would love to connect."
+            tag="🚀 Internship Tracks"
+            title="Available Internship Tracks"
+            subtitle="Choose an internship track aligned with the technical course you're pursuing."
           />
 
-          <div className="jobs-list-container">
+          <Reveal className="jobs-list-container stagger-children">
             {careersData.map((job) => (
               <div key={job.id} className="job-card card">
                 <div className="job-card-header">
@@ -92,7 +93,7 @@ export default function CareersPage() {
                     className="btn btn-primary btn-sm"
                     onClick={() => { setSelectedJob(job); setApplicationSent(false); }}
                   >
-                    <span>Apply for Position</span>
+                    <span>Apply for Internship</span>
                     <ArrowRight size={14} aria-hidden="true" />
                   </button>
                 </div>
@@ -100,7 +101,7 @@ export default function CareersPage() {
                 <p className="job-description">{job.description}</p>
 
                 <div className="job-requirements-block">
-                  <h4 className="req-heading">Key Requirements:</h4>
+                  <h4 className="req-heading">What You'll Need:</h4>
                   <ul className="req-list">
                     {job.requirements.map((req, rIdx) => (
                       <li key={rIdx} className="req-item">
@@ -112,7 +113,7 @@ export default function CareersPage() {
                 </div>
               </div>
             ))}
-          </div>
+          </Reveal>
         </div>
       </section>
 
@@ -160,10 +161,9 @@ export default function CareersPage() {
                   />
                 </div>
                 <div className="form-group">
-                  <label className="form-label">LinkedIn / GitHub / Portfolio URL</label>
+                  <label className="form-label">LinkedIn / GitHub / Portfolio URL (optional)</label>
                   <input
                     type="url"
-                    required
                     placeholder="https://github.com/username"
                     value={applicant.portfolio}
                     onChange={(e) => setApplicant({ ...applicant, portfolio: e.target.value })}
@@ -174,7 +174,7 @@ export default function CareersPage() {
                   <label className="form-label">Cover Note / Relevant Experience</label>
                   <textarea
                     rows="3"
-                    placeholder="Briefly highlight your engineering background..."
+                    placeholder="Briefly tell us about your background and why you're interested..."
                     value={applicant.notes}
                     onChange={(e) => setApplicant({ ...applicant, notes: e.target.value })}
                     className="form-input form-textarea"
@@ -190,7 +190,7 @@ export default function CareersPage() {
               <div className="job-apply-success">
                 <CheckCircle2 size={44} className="confirm-icon" />
                 <h3>Application Received</h3>
-                <p>Thank you for applying for the <strong>{selectedJob.title}</strong> role. Our engineering recruitment team will review your profile and reach out within 3 business days.</p>
+                <p>Thank you for applying for the <strong>{selectedJob.title}</strong>. Our training team will review your application and reach out within 3 business days.</p>
                 <button
                   type="button"
                   className="btn btn-secondary btn-sm"

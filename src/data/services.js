@@ -1,50 +1,50 @@
 export const servicesData = [
   {
-    id: "web-development",
-    title: "Web Application Development",
-    shortDescription: "Custom, scalable web platforms built with modern frontend frameworks and robust backend microservices.",
-    iconName: "Globe",
-    features: ["Single Page & Multi Page Apps", "API Development & Integration", "Performance & Core Web Vitals Optimization"],
-    link: "/services#web-development"
-  },
-  {
-    id: "software-engineering",
-    title: "Custom Software Engineering",
-    shortDescription: "End-to-end bespoke software tailored to automate complex workflows and modernize enterprise legacy systems.",
+    id: "technical-courses",
+    title: "Technical Skill Courses",
+    shortDescription: "Practical, job-focused training in the technical skills employers are hiring for right now.",
     iconName: "Code2",
-    features: ["Enterprise Workflow Systems", "Legacy Modernization", "Database Architecture & Optimization"],
-    link: "/services#software-engineering"
+    features: ["Python Programming", "Java Development", "Data Analyst Training", "AI & Machine Learning (AI/ML)", "AWS Cloud Fundamentals"],
+    link: "/services#technical-courses"
   },
   {
-    id: "cloud-solutions",
-    title: "Cloud & Infrastructure Solutions",
-    shortDescription: "Secure cloud migration, serverless deployments, container orchestration, and continuous integration pipelines.",
-    iconName: "Cloud",
-    features: ["AWS / GCP / Azure Architecture", "CI/CD & DevOps Automation", "Cost Optimization & Security Audits"],
-    link: "/services#cloud-solutions"
+    id: "career-courses",
+    title: "Career-Oriented & Non-Technical Courses",
+    shortDescription: "Skill-building programs beyond core tech, designed to strengthen your overall career readiness.",
+    iconName: "Megaphone",
+    features: ["Digital Marketing", "Placement Preparation", "Communication & Interview Skills"],
+    link: "/services#career-courses"
   },
   {
-    id: "ui-ux-design",
-    title: "UI/UX & Product Design",
-    shortDescription: "User-centered interface design, design systems, accessible components, and interactive prototypes.",
-    iconName: "Layout",
-    features: ["Design Systems & Token Architecture", "Figma Prototyping & User Testing", "Accessibility (WCAG 2.1) Audits"],
-    link: "/services#ui-ux-design"
+    id: "flexible-training",
+    title: "Flexible Online Training",
+    shortDescription: "Learn on a schedule that works for you, with the option of personalized one-to-one sessions.",
+    iconName: "Globe",
+    features: ["100% Online Classes", "Small-Batch Training", "One-to-One Training Available", "Convenient, Flexible Scheduling"],
+    link: "/services#flexible-training"
   },
   {
-    id: "mobile-development",
-    title: "Mobile App Development",
-    shortDescription: "High-performance cross-platform and native mobile applications for iOS and Android devices.",
-    iconName: "Smartphone",
-    features: ["React Native & Flutter Apps", "Offline-First Data Sync", "App Store & Play Store Deployment"],
-    link: "/services#mobile-development"
+    id: "project-based-learning",
+    title: "Project-Based Learning & Support",
+    shortDescription: "Every course pairs theory with hands-on project work, backed by continued support until completion.",
+    iconName: "Code2",
+    features: ["Real-World Practice Projects", "Ongoing Project Support", "Project Completion Certificate"],
+    link: "/services#project-based-learning"
   },
   {
-    id: "ai-ml-integration",
-    title: "AI & Data Solutions",
-    shortDescription: "Practical machine learning models, intelligent workflow automation, and structured data analytics pipelines.",
-    iconName: "Cpu",
-    features: ["Predictive Analytics", "Document & Data Extraction", "Custom LLM & API Integration"],
-    link: "/services#ai-ml-integration"
+    id: "internship-programs",
+    title: "Internship Programs",
+    shortDescription: "Apply your skills through an online internship with real practical tasks and project work.",
+    iconName: "Briefcase",
+    features: ["Online Internship", "Practical Tasks & Project Work", "Internship Certificate", "Project Completion Certificate"],
+    link: "/services#internship-programs"
+  },
+  {
+    id: "placement-support",
+    title: "Placement & Career Support",
+    shortDescription: "Guidance that continues after your course ends, to help you prepare for and land the right role.",
+    iconName: "Award",
+    features: ["Resume & Interview Preparation", "Mock Interview Practice", "Career Guidance After Course Completion"],
+    link: "/services#placement-support"
   }
 ];
