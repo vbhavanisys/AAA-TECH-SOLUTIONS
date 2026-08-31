@@ -22,21 +22,35 @@ export default function ContactPage() {
     if (errors[name]) setErrors(prev => ({ ...prev, [name]: '' }));
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const newErrors = {};
-    if (!formData.name.trim()) newErrors.name = 'Please provide your name.';
-    if (!formData.email.trim() || !/^\S+@\S+\.\S+$/.test(formData.email)) newErrors.email = 'Please provide a valid email.';
-    if (!formData.message.trim()) newErrors.message = 'Please provide a brief description of your inquiry.';
-
-    if (Object.keys(newErrors).length > 0) {
-      setErrors(newErrors);
-      return;
+  const handleSubmit = async (e) => {
+  e.preventDefault();
+  const newErrors = {};
+  if (!formData.name.trim()) newErrors.name = 'Please provide your name.';
+  if (!formData.email.trim()) newErrors.email = 'Please provide valid email';
+  if (!formData.message.trim()) newErrors.message = 'Please provide a brief description';
+  if (Object.keys(newErrors).length > 0) {
+    setErrors(newErrors);
+    return;
+  }
+  try {
+    const response = await fetch('http://localhost:5000/api/contact', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(formData)
+    });
+    const data = await response.json();
+    if (data.success || response.ok) {
+      setSubmitted(true);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      setFormData({ name: '', email: '', phone: '', inquiryType: 'Enterprise Software Development', message: '' });
+    } else {
+      alert('Failed to send message');
     }
-
-    setSubmitted(true);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
+  } catch (error) {
+    console.error(error);
+    alert('Server error - check backend is running');
+  }
+};
 
   const dynamicWaUrl = `https://wa.me/917358533721?text=${encodeURIComponent(
     `💬 *New Inquiry — AAA Tech Solutions*\n\n` +
