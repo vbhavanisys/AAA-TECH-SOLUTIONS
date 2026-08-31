@@ -1,18 +1,18 @@
 import React, { useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Globe, Code2, Cloud, Layout, Smartphone, Cpu, CheckCircle2, ArrowRight, ShieldCheck } from 'lucide-react';
+import { Globe, Code2, Megaphone, Briefcase, Award, CheckCircle2, ArrowRight, ShieldCheck } from 'lucide-react';
 import SectionHeader from '../../components/common/SectionHeader/SectionHeader';
 import FinalCTA from '../../components/home/FinalCTA/FinalCTA';
+import Reveal from '../../components/common/Reveal/Reveal';
 import { servicesData } from '../../data/services';
 import './ServicesPage.css';
 
 const iconMap = {
   Globe,
   Code2,
-  Cloud,
-  Layout,
-  Smartphone,
-  Cpu
+  Megaphone,
+  Briefcase,
+  Award
 };
 
 export default function ServicesPage() {
@@ -35,22 +35,22 @@ export default function ServicesPage() {
       {/* Services Hero */}
       <section className="services-hero-section">
         <div className="container">
-          <div className="services-hero-content">
-            <span className="section-tag section-tag-dark">💼 Enterprise Technology Services</span>
+          <Reveal className="services-hero-content">
+            <span className="section-tag section-tag-dark">🎓 Technical & Career Training Services</span>
             <h1 className="services-hero-title">
-              Software engineering and cloud architecture built around business objectives.
+              Practical, affordable skill training designed for real careers.
             </h1>
             <p className="services-hero-lead">
-              From enterprise software modernization to cloud-native platforms, we build resilient, secure, and scalable digital solutions.
+              AAA Tech Solutions offers technical and non-technical courses with hands-on projects, internships, and placement support — delivered online in small batches.
             </p>
-          </div>
+          </Reveal>
         </div>
       </section>
 
       {/* Services Detail List */}
       <section className="section services-list-section">
         <div className="container">
-          <div className="services-detailed-grid">
+          <Reveal className="services-detailed-grid stagger-children">
             {servicesData.map((service) => {
               const IconComponent = iconMap[service.iconName] || Code2;
 
@@ -62,14 +62,14 @@ export default function ServicesPage() {
                     </div>
                     <div>
                       <h2 className="service-detail-title">{service.title}</h2>
-                      <span className="service-category-badge">Enterprise Capability</span>
+                      <span className="service-category-badge">Training Program</span>
                     </div>
                   </div>
 
                   <p className="service-detail-desc">{service.shortDescription}</p>
 
                   <div className="service-deliverables">
-                    <h3 className="deliverables-heading">Core Deliverables & Capabilities:</h3>
+                    <h3 className="deliverables-heading">What's Included:</h3>
                     <ul className="deliverables-list">
                       {service.features.map((feature, idx) => (
                         <li key={idx} className="deliverable-item">
@@ -82,37 +82,37 @@ export default function ServicesPage() {
 
                   <div className="service-detail-footer">
                     <Link to="/contact" className="btn btn-primary btn-sm">
-                      <span>Request Technical Proposal</span>
+                      <span>Get Course Details</span>
                       <ArrowRight size={14} aria-hidden="true" />
                     </Link>
                   </div>
                 </div>
               );
             })}
-          </div>
+          </Reveal>
         </div>
       </section>
 
-      {/* Standards & SLA Guarantee */}
+      {/* Standards & Commitments */}
       <section className="section section-muted services-sla-section">
         <div className="container">
-          <div className="sla-card card">
+          <Reveal className="sla-card card">
             <div className="sla-icon-wrapper">
               <ShieldCheck size={36} className="sla-icon" />
             </div>
             <div className="sla-content">
-              <h2 className="sla-title">Our Engineering & Delivery Commitments</h2>
+              <h2 className="sla-title">Our Training Commitments</h2>
               <p className="sla-desc">
-                Every client engagement includes comprehensive architectural documentation, complete source code ownership, automated test suites, and structured knowledge transfer sessions for your internal teams.
+                Every course includes practical, project-based learning, continued project support, and a Course Completion Certificate — with mock interview practice and placement guidance available after you finish.
               </p>
             </div>
             <div className="sla-action">
               <Link to="/contact" className="btn btn-secondary btn-lg">
-                <span>Talk to a Principal Architect</span>
+                <span>Talk to Our Team</span>
                 <ArrowRight size={16} />
               </Link>
             </div>
-          </div>
+          </Reveal>
         </div>
       </section>
 

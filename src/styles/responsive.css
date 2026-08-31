@@ -67,6 +67,21 @@
   }
 }
 
+/* Filter bars & tag rows wrap cleanly on smaller screens
+   (Services / Projects / Careers / Blog / UI Components pages) */
+@media (max-width: 640px) {
+  .projects-filter-bar,
+  .blog-categories-bar {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .uicomp-cards-grid,
+  .uicomp-color-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* Small Mobile (320px - 375px) */
 @media (max-width: 375px) {
   :root {

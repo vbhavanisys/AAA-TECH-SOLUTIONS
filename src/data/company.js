@@ -1,38 +1,33 @@
 export const companyInfo = {
   name: "AAA Tech Solutions",
-  legalName: "AAA Tech Solutions Ltd.",
-  tagline: "Technology built around your business.",
-  shortDescription: "AAA Tech Solutions delivers practical software engineering, cloud architecture, and industry-focused professional learning designed around real-world business needs.",
+  legalName: "AAA Tech Solutions",
+  tagline: "Affordable, practical skill training for real careers.",
+  shortDescription: "AAA Tech Solutions is a Chennai-based education and skill-development Micro Enterprise offering affordable technical and non-technical courses, with a focus on practical learning, projects, internships, and placement preparation.",
   contact: {
-    email: "contact@aaatechsolutions.com",
+    email: "aaatechsolution26@gmail.com",
     phone: "+91 73585 33721",
     whatsapp: "917358533721",
-    address: "MPM Street, Kakkanji Colony, Chennai, Tamil Nadu 600039, India",
+    address: "Vyasarpadi, Chennai, Tamil Nadu, India",
     hours: "Monday – Friday: 9:00 AM – 6:00 PM (IST)"
   },
   location: {
-    addressLine1: "MPM Street",
-    addressLine2: "MPM தெரு",
-    area: "Kakkanji Colony",
-    city: "Chennai, Greater Chennai",
+    addressLine1: "Vyasarpadi",
+    addressLine2: "",
+    area: "Vyasarpadi",
+    city: "Chennai",
     state: "Tamil Nadu",
-    postalCode: "600039",
+    postalCode: "",
     country: "India",
-    mapsUrl: "https://maps.app.goo.gl/dcDFjnECe8EhUAHJ9",
-    embedMapUrl: "https://maps.google.com/maps?q=MPM+Street,+Kakkanji+Colony,+Chennai,+Tamil+Nadu+600039,+India&t=&z=16&ie=UTF8&iwloc=&output=embed",
+    mapsUrl: "https://www.google.com/maps/search/?api=1&query=Vyasarpadi%2C+Chennai%2C+Tamil+Nadu",
+    embedMapUrl: "https://maps.google.com/maps?q=Vyasarpadi,+Chennai,+Tamil+Nadu,+India&t=&z=13&ie=UTF8&iwloc=&output=embed",
     formattedLines: [
-      "MPM Street",
-      "MPM தெரு",
-      "Kakkanji Colony",
-      "Chennai, Greater Chennai",
-      "Tamil Nadu 600039",
+      "Vyasarpadi",
+      "Chennai, Tamil Nadu",
       "India"
     ]
   },
   social: [
-    { label: "LinkedIn", url: "https://linkedin.com", icon: "Linkedin" },
-    { label: "GitHub", url: "https://github.com", icon: "Github" },
-    { label: "Twitter", url: "https://twitter.com", icon: "Twitter" }
+    { label: "LinkedIn", url: "https://linkedin.com", icon: "Linkedin" }
   ],
   navLinks: [
     { label: "Home", path: "/" },
@@ -46,11 +41,11 @@ export const companyInfo = {
   ],
   footerLinks: {
     services: [
-      { label: "Custom Software", path: "/services#software-engineering" },
-      { label: "Web Applications", path: "/services#web-development" },
-      { label: "Cloud & Infrastructure", path: "/services#cloud-solutions" },
-      { label: "UI/UX Architecture", path: "/services#ui-ux-design" },
-      { label: "Mobile Engineering", path: "/services#mobile-development" }
+      { label: "Technical Courses", path: "/services#technical-courses" },
+      { label: "Career-Oriented Courses", path: "/services#career-courses" },
+      { label: "Project-Based Learning", path: "/services#project-based-learning" },
+      { label: "Internship Programs", path: "/services#internship-programs" },
+      { label: "Placement Support", path: "/services#placement-support" }
     ],
     courses: [
       { label: "Full-Stack Development", path: "/courses/fullstack-software-engineering" },
@@ -60,8 +55,8 @@ export const companyInfo = {
     ],
     company: [
       { label: "About Us", path: "/about" },
-      { label: "Selected Projects", path: "/projects" },
-      { label: "Careers", path: "/careers" },
+      { label: "Learner Projects", path: "/projects" },
+      { label: "Internship Program", path: "/careers" },
       { label: "Latest News & Blog", path: "/blog" },
       { label: "Contact & Inquiries", path: "/contact" }
     ],

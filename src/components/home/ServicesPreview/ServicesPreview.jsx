@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Globe, Code2, Cloud, Layout, Smartphone, Cpu, ArrowRight, Check } from 'lucide-react';
+import { Globe, Code2, Megaphone, Briefcase, Award, ArrowRight, Check } from 'lucide-react';
 import SectionHeader from '../../common/SectionHeader/SectionHeader';
 import { servicesData } from '../../../data/services';
 import './ServicesPreview.css';
@@ -8,10 +8,9 @@ import './ServicesPreview.css';
 const iconMap = {
   Globe: Globe,
   Code2: Code2,
-  Cloud: Cloud,
-  Layout: Layout,
-  Smartphone: Smartphone,
-  Cpu: Cpu
+  Megaphone: Megaphone,
+  Briefcase: Briefcase,
+  Award: Award
 };
 
 export default function ServicesPreview() {

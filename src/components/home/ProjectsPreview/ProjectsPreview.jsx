@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, ExternalLink, TrendingUp, FolderGit2 } from 'lucide-react';
+import { ArrowRight, ExternalLink, Award, FolderGit2 } from 'lucide-react';
 import SectionHeader from '../../common/SectionHeader/SectionHeader';
 import { projectsData } from '../../../data/projects';
 import './ProjectsPreview.css';
@@ -21,7 +21,7 @@ export default function ProjectsPreview() {
               <div className="project-card-header">
                 <div className="project-sector-badge">
                   <FolderGit2 size={13} aria-hidden="true" />
-                  <span>{project.clientSector}</span>
+                  <span>{project.courseTrack}</span>
                 </div>
                 <h3 className="project-title">{project.title}</h3>
               </div>
@@ -29,8 +29,8 @@ export default function ProjectsPreview() {
               <p className="project-desc">{project.shortDescription}</p>
 
               <div className="project-metric-pill">
-                <TrendingUp size={14} className="metric-trend-icon" aria-hidden="true" />
-                <span>{project.metrics}</span>
+                <Award size={14} className="metric-trend-icon" aria-hidden="true" />
+                <span>{project.outcome}</span>
               </div>
 
               <div className="project-tags-list">

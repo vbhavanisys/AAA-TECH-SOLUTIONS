@@ -1,61 +1,72 @@
 export const careersData = [
   {
-    id: "senior-fullstack-engineer",
-    title: "Senior Full-Stack Engineer",
-    department: "Engineering",
-    location: "Remote / Hybrid (Innovation District)",
-    type: "Full-Time",
-    experience: "4+ Years",
-    description: "Lead development of client enterprise platforms using React, TypeScript, Node.js, and PostgreSQL. Mentor junior developers and participate in architectural design reviews.",
+    id: "python-internship",
+    title: "Python Development Internship",
+    department: "Software Development",
+    location: "Online / Remote",
+    type: "Internship",
+    experience: "Beginner Friendly",
+    description: "Work on real practical tasks and project assignments to apply your Python skills, with guided support throughout.",
     requirements: [
-      "Deep expertise in TypeScript, React, and Node.js backend systems.",
-      "Experience with relational database modeling (PostgreSQL) and query optimization.",
-      "Strong understanding of Docker, CI/CD pipelines, and cloud services (AWS/GCP).",
-      "Excellent communication and collaborative problem-solving skills."
+      "Basic understanding of Python fundamentals.",
+      "Willingness to work on real project tasks.",
+      "A laptop with a stable internet connection."
     ]
   },
   {
-    id: "cloud-devops-architect",
-    title: "Cloud & DevOps Solutions Architect",
-    department: "Infrastructure",
-    location: "Remote",
-    type: "Full-Time",
-    experience: "5+ Years",
-    description: "Design secure multi-cloud architectures, automate deployment pipelines with Terraform and Kubernetes, and assist in technical training workshops.",
+    id: "java-internship",
+    title: "Java Development Internship",
+    department: "Software Development",
+    location: "Online / Remote",
+    type: "Internship",
+    experience: "Beginner Friendly",
+    description: "Get hands-on experience building and debugging Java applications through practical, project-based tasks.",
     requirements: [
-      "Proven track record designing scalable architectures on AWS or GCP.",
-      "Hands-on expertise with Terraform, Kubernetes, Helm, and GitOps workflows.",
-      "Experience with observability stacks (Prometheus, Grafana, OpenTelemetry).",
-      "Relevant cloud certifications (AWS Solutions Architect, CKA) preferred."
+      "Basic understanding of Java / OOP concepts.",
+      "Willingness to work on real project tasks.",
+      "A laptop with a stable internet connection."
     ]
   },
   {
-    id: "ui-ux-design-lead",
-    title: "Senior UI/UX & Design Systems Lead",
-    department: "Product Design",
-    location: "Hybrid (Innovation District)",
-    type: "Full-Time",
-    experience: "3+ Years",
-    description: "Lead design system initiatives, conduct user research, create accessible component guidelines, and work closely with frontend engineers.",
+    id: "data-analyst-internship",
+    title: "Data Analyst Internship",
+    department: "Data & Analytics",
+    location: "Online / Remote",
+    type: "Internship",
+    experience: "Beginner Friendly",
+    description: "Practice data cleaning, analysis, and reporting on real-style datasets under project guidance.",
     requirements: [
-      "Advanced mastery of Figma, auto-layout, design tokens, and prototyping.",
-      "Strong portfolio showcasing enterprise B2B or web application design systems.",
-      "Deep knowledge of WCAG 2.1 accessibility standards and responsive UI patterns.",
-      "Experience partnering with engineers for design QA and token integration."
+      "Basic understanding of Excel or SQL.",
+      "Willingness to work on real project tasks.",
+      "A laptop with a stable internet connection."
     ]
   },
   {
-    id: "technical-instructor-data",
-    title: "Lead Technical Instructor – Data Engineering",
-    department: "Academy & Education",
-    location: "Remote (Part-Time / Contract)",
-    type: "Part-Time",
-    experience: "3+ Years",
-    description: "Instruct cohort learners in real-world data engineering workflows, Airflow DAG creation, and cloud data warehousing practices.",
+    id: "ai-ml-internship",
+    title: "AI & Machine Learning Internship",
+    department: "Data & Analytics",
+    location: "Online / Remote",
+    type: "Internship",
+    experience: "Beginner Friendly",
+    description: "Apply core AI/ML concepts to guided project tasks, from data preparation to basic model building.",
     requirements: [
-      "Production experience with Python, SQL, Apache Airflow, and BigQuery/Snowflake.",
-      "Passion for teaching, code reviews, and mentorship.",
-      "Ability to articulate complex distributed data concepts clearly."
+      "Basic understanding of Python and AI/ML fundamentals.",
+      "Willingness to work on real project tasks.",
+      "A laptop with a stable internet connection."
+    ]
+  },
+  {
+    id: "aws-cloud-internship",
+    title: "AWS Cloud Internship",
+    department: "Cloud & Infrastructure",
+    location: "Online / Remote",
+    type: "Internship",
+    experience: "Beginner Friendly",
+    description: "Get practical exposure to core AWS services through guided cloud project tasks.",
+    requirements: [
+      "Basic understanding of cloud/AWS fundamentals.",
+      "Willingness to work on real project tasks.",
+      "A laptop with a stable internet connection."
     ]
   }
 ];
