@@ -1,5 +1,5 @@
 const express = require('express');
-const mysql = require('mysql');
+const mysql = require('mysql2');
 const cors = require('cors');
 
 const app = express();
@@ -21,18 +21,17 @@ db.connect((err) => {
 // === CONTACT API ===
 app.post('/api/contact', (req, res) => {
   const { name, email, message } = req.body;
-  db.query('INSERT INTO contact_messages (name, email, message) VALUES (?,?,?)',
-  [name, email, message], (err, result) => {
+  db.query('INSERT INTO contact_messages (name, email, message) VALUES (?,?,?)', [name, email, message], (err, result) => {
     if (err) return res.status(500).send(err);
     res.send({ success: true, msg: 'Message saved!' });
   });
 });
 
-// === ENROLL API ===
+// === ENROLL API - FIXED ===
 app.post('/api/enroll', (req, res) => {
   const { fullName, mobile, email, course, plan, message } = req.body;
   console.log("Enroll Data:", req.body);
-  const sql = `INSERT INTO enrollments (student_name, email, phone, course_name, plan, message, course_id) VALUES (?, ?, ?, ?, ?, ?, ?)`;
+  const sql = "INSERT INTO enrollments (student_name, email, phone, course_name, plan, message, course_id) VALUES (?, ?, ?, ?, ?, ?, ?)";
   db.query(sql, [fullName, email, mobile, course, plan, message, 1], (err, result) => {
     if (err) {
       console.error("ENROLL ERROR:", err);
@@ -42,9 +41,26 @@ app.post('/api/enroll', (req, res) => {
   });
 });
 
+// === JOB APPLICATION API - NEW ===
+app.post('/api/job', (req, res) => {
+  const { name, email, phone, position, experience, resume_link } = req.body;
+  const sql = "INSERT INTO job_applications (name, email, phone, position, experience, resume_link) VALUES (?, ?, ?, ?, ?, ?)";
+  db.query(sql, [name, email, phone, position, experience, resume_link], (err, result) => {
+    if (err) return res.status(500).send(err);
+    res.send({ success: true, msg: 'Job application saved!' });
+  });
+});
+
 // === ADMIN PANEL ===
 app.get('/api/messages', (req,res)=>{
   db.query('SELECT * FROM contact_messages', (err, result)=>{
+    if(err) return res.status(500).send(err);
+    res.send(result);
+  });
+});
+
+app.get('/api/enrollments', (req,res)=>{
+  db.query('SELECT * FROM enrollments ORDER BY id DESC', (err, result)=>{
     if(err) return res.status(500).send(err);
     res.send(result);
   });
