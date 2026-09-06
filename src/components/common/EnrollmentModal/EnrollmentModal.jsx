@@ -31,26 +31,20 @@ export default function EnrollmentModal() {
   const [submitted, setSubmitted] = useState(false);
   const [refId, setRefId] = useState('');
 
-  // Sync selectedCourseId when modal opens
   useEffect(() => {
     if (isEnrollmentOpen) {
       setFormData(prev => ({
-        ...prev,
+      ...prev,
         courseId: selectedCourseId || ''
       }));
       setFormErrors({});
       setSubmitted(false);
-
-      // Focus first input on open
       const timer = setTimeout(() => {
         if (firstInputRef.current) {
           firstInputRef.current.focus();
         }
       }, 100);
-
-      // Lock body scroll
       document.body.style.overflow = 'hidden';
-
       return () => {
         clearTimeout(timer);
         document.body.style.overflow = '';
@@ -60,14 +54,12 @@ export default function EnrollmentModal() {
     }
   }, [isEnrollmentOpen, selectedCourseId]);
 
-  // Handle ESC key to close modal
   useEffect(() => {
     const handleKeyDown = (e) => {
-      if (e.key === 'Escape' && isEnrollmentOpen && !isSubmitting) {
+      if (e.key === 'Escape' && isEnrollmentOpen &&!isSubmitting) {
         closeEnrollmentModal();
       }
     };
-
     if (isEnrollmentOpen) {
       window.addEventListener('keydown', handleKeyDown);
     }
@@ -79,12 +71,11 @@ export default function EnrollmentModal() {
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({
-      ...prev,
+    ...prev,
       [name]: value
     }));
-
     if (formErrors[name]) {
-      setFormErrors(prev => ({ ...prev, [name]: '' }));
+      setFormErrors(prev => ({...prev, [name]: '' }));
     }
   };
 
@@ -93,66 +84,77 @@ export default function EnrollmentModal() {
     if (!formData.fullName.trim()) {
       errors.fullName = 'Please enter your full name.';
     }
-
     const cleanPhone = formData.phone.replace(/[^0-9]/g, '');
     if (!formData.phone.trim()) {
       errors.phone = 'Please enter your mobile number.';
     } else if (cleanPhone.length < 10) {
       errors.phone = 'Please enter a valid 10-digit mobile number.';
     }
-
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!formData.email.trim()) {
       errors.email = 'Please enter your email address.';
     } else if (!emailRegex.test(formData.email.trim())) {
       errors.email = 'Please enter a valid email address.';
     }
-
     if (!formData.courseId) {
       errors.courseId = 'Please select the course you are interested in.';
     }
-
     return errors;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const errors = validateForm();
     if (Object.keys(errors).length > 0) {
       setFormErrors(errors);
       return;
     }
-
     setIsSubmitting(true);
-
-    setTimeout(() => {
-      const generatedId = `AAA-ENR-${Math.floor(100000 + Math.random() * 900000)}`;
-      setRefId(generatedId);
-      setIsSubmitting(false);
+    try {
+      // FIXED DA BHAVANI - BACKEND KU CORRECT NAME ANUPPROM DA
+      const response = await fetch('http://localhost:5000/api/enroll', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          student_name: formData.fullName,
+          email: formData.email,
+          phone: formData.phone,
+          course: formData.courseId,
+          plan: formData.plan,
+          message: formData.message
+        })
+      });
+      const result = await response.json();
+      if (!response.ok) {
+        throw new Error(result.message || 'Failed to enroll');
+      }
+      setRefId(result.refId || `AAA-ENR-${Math.floor(100000 + Math.random() * 900000)}`);
       setSubmitted(true);
-
-      // Save submission record to localStorage
       try {
         const existing = JSON.parse(localStorage.getItem('aaa_enrollments') || '[]');
         existing.push({
-          refId: generatedId,
-          ...formData,
+          refId: result.refId,
+        ...formData,
           submittedAt: new Date().toISOString()
         });
         localStorage.setItem('aaa_enrollments', JSON.stringify(existing));
       } catch (err) {
         console.warn(err);
       }
-    }, 700);
+    } catch (error) {
+      console.error('Enrollment error:', error);
+      alert('Enrollment failed: ' + error.message + '. Check backend running on port 5000!');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleBackdropClick = (e) => {
-    if (e.target === e.currentTarget && !isSubmitting) {
+    if (e.target === e.currentTarget &&!isSubmitting) {
       closeEnrollmentModal();
     }
   };
 
-  // WhatsApp Enquiry Link Construction
   const selectedCourseName = coursesData.find(c => c.id === formData.courseId)?.title || 'General Course Track';
   const waNumber = companyInfo.contact.whatsapp || '917358533721';
   const waMessage = encodeURIComponent(
@@ -179,7 +181,6 @@ export default function EnrollmentModal() {
         aria-labelledby="enrollment-modal-title"
         ref={modalRef}
       >
-        {/* Modal Header */}
         <div className="enrollment-modal-header">
           <div className="modal-title-wrap">
             <h2 id="enrollment-modal-title" className="enrollment-modal-title">
@@ -201,9 +202,8 @@ export default function EnrollmentModal() {
           </button>
         </div>
 
-        {/* Modal Body */}
         <div className="enrollment-modal-body">
-          {submitted ? (
+          {submitted? (
             <div className="enrollment-success-view">
               <div className="success-icon-badge">
                 <CheckCircle2 size={48} className="success-check" />
@@ -212,12 +212,10 @@ export default function EnrollmentModal() {
               <p className="success-message">
                 Thank you for applying, <strong>{formData.fullName}</strong>. Our admissions and engineering team will review your profile and reach out within 24 hours.
               </p>
-
               <div className="enrollment-ref-card">
                 <span className="ref-label">Application Reference ID</span>
                 <span className="ref-number">{refId}</span>
               </div>
-
               <div className="success-actions-row">
                 <a
                   href={waUrl}
@@ -239,8 +237,7 @@ export default function EnrollmentModal() {
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="enrollment-modal-form" noValidate>
-              {/* Full Name */}
-              <div className={`modal-form-group ${formErrors.fullName ? 'has-error' : ''}`}>
+              <div className={`modal-form-group ${formErrors.fullName? 'has-error' : ''}`}>
                 <label htmlFor="modal-full-name" className="modal-form-label">
                   Full Name <span className="req-asterisk">*</span>
                 </label>
@@ -261,8 +258,7 @@ export default function EnrollmentModal() {
                 )}
               </div>
 
-              {/* Mobile Number */}
-              <div className={`modal-form-group ${formErrors.phone ? 'has-error' : ''}`}>
+              <div className={`modal-form-group ${formErrors.phone? 'has-error' : ''}`}>
                 <label htmlFor="modal-phone" className="modal-form-label">
                   Mobile Number <span className="req-asterisk">*</span>
                 </label>
@@ -282,8 +278,7 @@ export default function EnrollmentModal() {
                 )}
               </div>
 
-              {/* Email Address */}
-              <div className={`modal-form-group ${formErrors.email ? 'has-error' : ''}`}>
+              <div className={`modal-form-group ${formErrors.email? 'has-error' : ''}`}>
                 <label htmlFor="modal-email" className="modal-form-label">
                   Email Address <span className="req-asterisk">*</span>
                 </label>
@@ -303,8 +298,7 @@ export default function EnrollmentModal() {
                 )}
               </div>
 
-              {/* Course Interested In */}
-              <div className={`modal-form-group ${formErrors.courseId ? 'has-error' : ''}`}>
+              <div className={`modal-form-group ${formErrors.courseId? 'has-error' : ''}`}>
                 <label htmlFor="modal-course" className="modal-form-label">
                   Course Interested In <span className="req-asterisk">*</span>
                 </label>
@@ -328,7 +322,6 @@ export default function EnrollmentModal() {
                 )}
               </div>
 
-              {/* Preferred Plan */}
               <div className="modal-form-group">
                 <label htmlFor="modal-plan" className="modal-form-label">
                   Preferred Plan
@@ -350,7 +343,6 @@ export default function EnrollmentModal() {
                 </select>
               </div>
 
-              {/* Message / Enquiry */}
               <div className="modal-form-group">
                 <label htmlFor="modal-message" className="modal-form-label">
                   Message / Enquiry <span className="optional-tag">(optional)</span>
@@ -367,13 +359,12 @@ export default function EnrollmentModal() {
                 ></textarea>
               </div>
 
-              {/* Primary Action Button */}
               <button
                 type="submit"
                 className="btn btn-primary btn-lg modal-submit-btn"
                 disabled={isSubmitting}
               >
-                {isSubmitting ? (
+                {isSubmitting? (
                   <>
                     <Loader2 size={18} className="spinner-icon" aria-hidden="true" />
                     <span>Submitting Enrollment...</span>
@@ -386,7 +377,6 @@ export default function EnrollmentModal() {
                 )}
               </button>
 
-              {/* Secondary WhatsApp Button */}
               <a
                 href={waUrl}
                 target="_blank"
