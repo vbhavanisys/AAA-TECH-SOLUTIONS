@@ -1,11 +1,12 @@
 const express = require('express');
-const mysql = require('mysql2');
 const cors = require('cors');
+const mysql = require('mysql2');
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
+// DB CONNECT
 const db = mysql.createConnection({
   host: 'localhost',
   user: 'root',
@@ -13,65 +14,62 @@ const db = mysql.createConnection({
   database: 'aaa_tech_db'
 });
 
-db.connect((err) => {
-  if (err) console.log(err);
-  else console.log("DB Connected");
+db.connect(err => {
+  if(err) {
+    console.log("DB Error:", err);
+  } else {
+    console.log("DB Connected - aaa_tech_db");
+  }
 });
 
-// === CONTACT API ===
+// ENROLL API - FINAL CORRECT CODE
+app.post('/api/enroll', (req, res) => {
+  console.log("FRONTEND DATA:", req.body);
+
+  const student_name = req.body.student_name || req.body.fullName || "";
+  const email = req.body.email || "";
+  const phone = req.body.phone || req.body.mobileNumber || "";
+  const course_name = req.body.course_name || req.body.courseInterestedIn || "";
+  const plan = req.body.plan || req.body.preferredPlan || "";
+  const message = req.body.message || "";
+
+  const sql = "INSERT INTO enrollments (student_name, email, phone, course_name, plan, message) VALUES (?, ?, ?, ?, ?, ?)";
+  
+  db.query(sql, [student_name, email, phone, course_name, plan, message], (err, result) => {
+    if(err) {
+      console.log("INSERT ERROR:", err);
+      return res.status(500).json({ error: err.message });
+    }
+    console.log("SUCCESS ID:", result.insertId);
+    res.json({ success: true, id: result.insertId });
+  });
+});
+
+// CONTACT FORM API - un task la main
 app.post('/api/contact', (req, res) => {
   const { name, email, message } = req.body;
-  db.query('INSERT INTO contact_messages (name, email, message) VALUES (?,?,?)', [name, email, message], (err, result) => {
-    if (err) return res.status(500).send(err);
-    res.send({ success: true, msg: 'Message saved!' });
+  if(!name || !email) return res.status(400).json({ error: "Name & Email required" });
+  
+  const sql = "INSERT INTO contact_messages (name, email, message) VALUES (?, ?, ?)";
+  db.query(sql, [name, email, message], (err, result) => {
+    if(err) return res.status(500).json({ error: err.message });
+    res.json({ success: true });
   });
 });
 
-// === ENROLL API - FIXED ===
-app.post('/api/enroll', (req, res) => {
-  const { fullName, mobile, email, course, plan, message } = req.body;
-  console.log("Enroll Data:", req.body);
-  const sql = "INSERT INTO enrollments (student_name, email, phone, course_name, plan, message, course_id) VALUES (?, ?, ?, ?, ?, ?, ?)";
-  db.query(sql, [fullName, email, mobile, course, plan, message, 1], (err, result) => {
-    if (err) {
-      console.error("ENROLL ERROR:", err);
-      return res.status(500).send(err);
-    }
-    res.send({ success: true, msg: 'Enrolled saved!' });
+// ADMIN PANEL - Team lead ah ne data paarkanum la
+app.get('/api/enrollments', (req, res) => {
+  db.query("SELECT * FROM enrollments ORDER BY created_at DESC", (err, rows) => {
+    if(err) return res.status(500).json({ error: err.message });
+    res.json(rows);
   });
 });
 
-// === JOB APPLICATION API - NEW ===
-app.post('/api/job', (req, res) => {
-  const { name, email, phone, position, experience, resume_link } = req.body;
-  const sql = "INSERT INTO job_applications (name, email, phone, position, experience, resume_link) VALUES (?, ?, ?, ?, ?, ?)";
-  db.query(sql, [name, email, phone, position, experience, resume_link], (err, result) => {
-    if (err) return res.status(500).send(err);
-    res.send({ success: true, msg: 'Job application saved!' });
+app.get('/api/contacts', (req, res) => {
+  db.query("SELECT * FROM contact_messages ORDER BY created_at DESC", (err, rows) => {
+    if(err) return res.status(500).json({ error: err.message });
+    res.json(rows);
   });
-});
-
-// === ADMIN PANEL ===
-app.get('/api/messages', (req,res)=>{
-  db.query('SELECT * FROM contact_messages', (err, result)=>{
-    if(err) return res.status(500).send(err);
-    res.send(result);
-  });
-});
-
-app.get('/api/enrollments', (req,res)=>{
-  db.query('SELECT * FROM enrollments ORDER BY id DESC', (err, result)=>{
-    if(err) return res.status(500).send(err);
-    res.send(result);
-  });
-});
-
-app.post('/api/admin/login', (req, res) => {
-  const { email, password } = req.body;
-  if(email === "admin@gmail.com" && password === "admin123"){
-    return res.send({ success: true, message: "Login Success" });
-  }
-  res.status(401).send({ success: false, message: "Invalid login" });
 });
 
 app.listen(5000, () => {
